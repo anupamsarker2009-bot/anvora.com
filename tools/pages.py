@@ -59,6 +59,17 @@ def rewire(s):
 
 home = rewire(home)
 
+# showreel: Anvora's own video (audio track removed) for the preview loop and the full-screen player
+REEL = "/videos/anvora-reel.mp4"
+home = re.sub(r'data-video-src="[^"]*Osmo-V12-Reel[^"]*"', f'data-video-src="{REEL}"', home)
+home = re.sub(r'data-player-src="https://vz-[^"]*playlist\.m3u8"', f'data-player-src="{REEL}" data-player-muted="true"', home)
+home = home.replace(">00:48<", ">00:33<")
+_js = os.path.join(SITE, "js", "55554.js")
+_src = open(_js, encoding="utf-8").read()
+_old = "T=!(!window.Hls||!Hls.isSupported()||q)"
+if _old in _src:  # let the player play plain MP4 files instead of forcing HLS streaming
+    open(_js, "w", encoding="utf-8", newline="").write(_src.replace(_old, "T=!(!window.Hls||!Hls.isSupported()||q||/\\.mp4(\\?|$)/i.test(c))", 1))
+
 # Osmo's live resource counter -> static Anvora values
 home = home.replace('<span data-vault-total="" class="nav-bar__big-span-number">000', '<span class="nav-bar__big-span-number">6')
 home = home.replace('<div data-vault-total="" class="pricing-benefit__tag p-r">000', '<div class="pricing-benefit__tag p-r">✓')
