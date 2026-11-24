@@ -83,7 +83,7 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
 
 # footer column headings
 home = re.sub(r'(>Support</a></li>)', r'\1<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
-home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li>', 1)
+home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-stories" class="p-m">Instagram Stories</a></li>', 1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
 
@@ -642,6 +642,12 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-post .anv-pill{font:inherit;font-size:.95em;background:none;cursor:pointer;color:inherit}
 @media (max-width:991px){.anv-posts{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){.anv-posts{grid-template-columns:1fr}}
+.anv-stories{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-l) var(--gap-s)}
+.anv-story__frame{border-radius:.75em;overflow:hidden;background:var(--color-neutral-300);aspect-ratio:9/16;box-shadow:0 .5em 2em rgba(0,0,0,.06)}
+.anv-story__frame canvas{display:block;width:100%;height:100%}
+@media (max-width:991px){.anv-stories{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:767px){.anv-stories{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:479px){.anv-stories{grid-template-columns:1fr;max-width:22em;margin:0 auto}}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -655,6 +661,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-filter]');if(!b)return;var f=b.getAttribute('data-filter');b.parentNode.querySelectorAll('[data-filter]').forEach(function(x){x.classList.toggle('is--on',x===b)});document.querySelectorAll('.anv-fi').forEach(function(t){t.hidden=!(f==='all'||t.getAttribute('data-cat')===f)});if(window.ScrollTrigger)ScrollTrigger.refresh()});
 function anvPostsLoad(){if(!document.querySelector('canvas[data-post]:not([data-drawn])'))return;if(window.anvPosts){anvPosts.render();return}if(document.getElementById('anv-posts-js'))return;var s=document.createElement('script');s.id='anv-posts-js';s.src='/js/anvora-posts.js';document.head.appendChild(s)}
 document.addEventListener('DOMContentLoaded',anvPostsLoad);new MutationObserver(function(){clearTimeout(window.__anvPT);window.__anvPT=setTimeout(anvPostsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
+function anvStoriesLoad(){if(!document.querySelector('canvas[data-story]:not([data-drawn])'))return;if(window.anvStories){anvStories.render();return}if(document.getElementById('anv-stories-js'))return;var s=document.createElement('script');s.id='anv-stories-js';s.src='/js/anvora-stories.js';document.head.appendChild(s)}
+document.addEventListener('DOMContentLoaded',anvStoriesLoad);new MutationObserver(function(){clearTimeout(window.__anvST);window.__anvST=setTimeout(anvStoriesLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -1434,6 +1442,46 @@ posts_body = (hero("Social Media", f"{len(SOCIAL_POSTS)} posts", "Social Media P
                     ("Mix the types", "Alternate tips, offers and brand posts, so the feed is useful and not only promotional."),
                     ("Reply to comments", "Answer every comment in the first hour. It builds trust and helps reach.")]), dark=True))
 write("/social-media-posts", page("social-media-posts", "Social Media Posts", "Ready-to-post Anvora social media graphics, downloadable as JPG.", posts_body, cta=False))
+
+# ------------------------------------------------------------------ instagram stories (drawn by /js/anvora-stories.js)
+_stories_js = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "stories.js"), encoding="utf-8").read().replace("__MARK__", _mark_path)
+open(os.path.join(SITE, "js", "anvora-stories.js"), "w", encoding="utf-8", newline="\n").write(_stories_js)
+
+IG_STORIES = [
+ ("hello", "Hi, we’re Anvora", "Brand", "Post it as your very first story. Add a Mention sticker of @thumbnailanvora or a Link sticker to the website."),
+ ("founding", "Founding client spots", "Offer", "Add a Link sticker below the three cards, pointing to the contact page. Pin it to a ‘Work with us’ highlight."),
+ ("audit", "Free marketing audit", "Offer", "Add a Link sticker over the empty space at the bottom of the report card, pointing to the free audit page."),
+ ("poll", "Quick poll: Google reviews", "Engagement", "Add a Poll sticker with the answers ‘Yes, always’ and ‘Not yet’. Follow up the next day with a review-reply tip."),
+ ("tip-phone", "One-minute tip", "Tip", "Good for a Tuesday or Wednesday. Save it to a ‘Tips’ highlight so new visitors find it later."),
+ ("myth", "Myth vs fact", "Tip", "Add a Quiz sticker before revealing the fact, or post as is. Works well straight after a feed post on the same topic."),
+ ("services", "What we do", "Services", "Pin it to a ‘Services’ highlight. Add a Link sticker to the services page."),
+ ("process", "How we work", "Process", "Pin it to a ‘How we work’ highlight next to the services story."),
+ ("first-week", "Your first week with us", "Behind the scenes", "Shows people what happens after they sign up. Add a Link sticker to the contact page."),
+ ("coffee-shop", "Example: coffee shop", "Example approach", "Add a Link sticker to the coffee shop example page. Always keep the ‘example plan, not a past client’ line visible."),
+ ("ask", "Ask us anything", "Engagement", "Place Instagram’s Questions sticker over the white card. Answer the best questions in your next stories."),
+ ("five-second-test", "5-second homepage test", "Tip", "Ask people to screenshot it. Add an Emoji Slider sticker: ‘How would your homepage score?’"),
+]
+
+def story_card(i, s):
+    sid, title, kind, tip = s
+    return (f'<article class="anv-post"><div class="anv-story__frame"><canvas data-story="{sid}" width="1080" height="1920" role="img" aria-label="{E(title)} story"></canvas></div>'
+            f'<div class="anv-post__meta"><div class="anv-row" style="justify-content:space-between"><span class="eyebrow anv-muted">Story {i+1:02d} · {E(kind)}</span></div>'
+            f'<h3 class="h-xs">{E(title)}</h3>'
+            f'<details class="anv-post__cap"><summary>How to post it</summary><p>{E(tip)}</p></details>'
+            f'<div class="anv-row"><button type="button" class="anv-dl" data-story-download="{sid}">Download JPG ↓</button></div></div></article>')
+
+stories_body = (hero("Instagram", f"{len(IG_STORIES)} stories", "Instagram Stories",
+                     "Ready-to-post Instagram Stories in Anvora’s brand colours and fonts. Each story is 1080 × 1920 px (9:16), with the important parts kept clear of Instagram’s top and bottom bars.",
+                     [])
+                + section('<div class="anv-row" style="justify-content:space-between;margin-bottom:var(--gap-l)">'
+                          '<p class="p-m anv-muted" style="max-width:34em">Click <strong>Download JPG</strong> under any story to save it, or download all of them at once. Open <strong>How to post it</strong> for the best sticker to add in Instagram.</p>'
+                          f'<button type="button" class="anv-dl is--big" data-story-download="all">Download all {len(IG_STORIES)} ↓</button></div>'
+                          f'<div class="anv-stories">{"".join(story_card(i, s) for i, s in enumerate(IG_STORIES))}</div>')
+                + section(head("Story tips", "How to get the most from Stories") + cards([
+                      ("Add a sticker", "Polls, questions and links get people tapping. A story with a sticker usually gets more replies than one without."),
+                      ("Post a few in a row", "Three to five stories a day, a few days a week, keeps you at the front of your followers’ story bar."),
+                      ("Save the best to highlights", "Stories vanish after 24 hours. Highlights like ‘Services’, ‘Tips’ and ‘Work with us’ keep them on your profile.")]), dark=True))
+write("/instagram-stories", page("instagram-stories", "Instagram Stories", "Ready-to-post Anvora Instagram Stories, downloadable as JPG.", stories_body, cta=False))
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")

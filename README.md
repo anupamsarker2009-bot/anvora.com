@@ -18,6 +18,7 @@ Website for **Anvora**, a full-service marketing company.
 | FAQs | `/faq/` |
 | Brand Guidelines | `/brand/` |
 | Social Media Posts (12 downloadable JPGs) | `/social-media-posts/` |
+| Instagram Stories (12 downloadable JPGs, 1080 × 1920) | `/instagram-stories/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |
 
 ## Run it on your computer
