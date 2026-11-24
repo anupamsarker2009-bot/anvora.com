@@ -78,6 +78,7 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
                     '<li class="footer-link__col-li"><a data-underline-link="" href="/services/web-landing-pages" class="p-m">Web &amp; Landing Pages</a>')
 
 # footer column headings
+home = re.sub(r'(>Support</a></li>)', r'<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
 
@@ -217,6 +218,48 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-article .h-s{margin:.6em 0}
 .anv-featured{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--gap-s);margin-bottom:var(--gap-s)}
 .anv-featured .anv-tile{min-height:26em}
+.anv-grid.is--4{grid-template-columns:repeat(4,1fr)}.anv-grid.is--6{grid-template-columns:repeat(6,1fr)}
+.anv-pill{border:1px solid var(--color-neutral-450);border-radius:2em;padding:.55em 1.1em;font-size:.95em;color:inherit;text-decoration:none;transition:background .2s,color .2s}
+.anv-pill:hover{background:var(--color-dark);color:var(--color-light)}
+.anv-logo{border-radius:.75em;padding:var(--gap-l);min-height:17em;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+.anv-logo__mark{width:7em;align-self:center;margin:auto}
+.anv-logo__wm{width:16em;margin:auto;align-self:center}
+.anv-logo__lockup{display:flex;align-items:center;gap:1.1em;margin:auto;align-self:center}
+.anv-logo__lockup span:first-child{width:4.2em;display:block}.anv-logo__lockup span:last-child{width:13em;display:block}
+.anv-sw{all:unset;cursor:pointer;display:flex;flex-direction:column;background:var(--color-white);border-radius:.75em;overflow:hidden;transition:transform .3s}
+.anv-sw:hover{transform:translateY(-.25em)}.anv-sw:focus-visible{outline:2px solid var(--color-purple);outline-offset:2px}
+.anv-sw__chip{height:9em;display:flex;align-items:flex-end;padding:1em;transition:opacity .2s}
+.anv-sw:not(.is--big) .anv-sw__chip{height:5em}
+.anv-sw__chip .eyebrow{opacity:0;transition:opacity .2s}.anv-sw:hover .anv-sw__chip .eyebrow{opacity:.8}
+.anv-sw.is--copied .anv-sw__chip .eyebrow{opacity:1}
+.anv-sw__info{padding:1em 1.1em 1.2em;display:flex;flex-direction:column;gap:.4em}
+.anv-sw__codes{display:flex;flex-direction:column;gap:.15em;font-family:Haffer Mono,Arial,sans-serif;font-size:.72em;text-transform:uppercase;opacity:.65}
+.anv-ratio{display:flex;height:4.5em;border-radius:.75em;overflow:hidden;box-shadow:inset 0 0 0 1px var(--color-neutral-450)}
+.anv-ratio i{font-style:normal;display:flex;align-items:flex-end;padding:.8em;font-family:Haffer Mono,Arial,sans-serif;font-size:.7em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.anv-pair{border-radius:.75em;padding:1.2em;min-height:9em;display:flex;flex-direction:column;justify-content:space-between;gap:.4em;box-shadow:inset 0 0 0 1px rgba(128,128,128,.2)}
+.anv-font{background:var(--color-white);border-radius:.75em;padding:var(--gap-l);display:flex;flex-direction:column;gap:1em}
+.anv-tscale{border-top:1px solid var(--color-neutral-450)}
+.anv-ts{display:grid;grid-template-columns:14em 1fr;gap:var(--gap-l);align-items:center;padding:1.4em 0;border-bottom:1px solid var(--color-neutral-450);overflow:hidden}
+.anv-ts__meta{display:flex;flex-direction:column;gap:.35em}
+.anv-ts__sample{white-space:nowrap;overflow:hidden;text-overflow:clip}
+.anv-btns{display:grid;gap:.6em}
+.anv-btnrow>div:first-child{display:flex;align-items:center}
+.anv-btnrow{display:grid;grid-template-columns:16em 1fr;gap:var(--gap-l);align-items:center;background:var(--color-white);border-radius:.75em;padding:1.2em 1.4em}
+.anv-btnrow code,.anv-space code{font-family:Haffer Mono,Arial,sans-serif;font-size:.85em}
+.anv-onDark{margin-top:var(--gap-s);background:var(--color-dark);color:var(--color-light);border-radius:.75em;padding:var(--gap-l)}
+.anv-spacing{display:grid;gap:.55em}
+.anv-space{display:grid;grid-template-columns:8.5em 4em 1fr;align-items:center;gap:1em}
+.anv-space i{display:block;height:.9em;background:var(--color-purple);border-radius:.2em;max-width:100%}
+.anv-do,.anv-dont{border-radius:.5em;padding:.9em 1em;display:flex;flex-direction:column;gap:.4em}
+.anv-do{background:color-mix(in srgb,var(--color-electric) 35%,transparent)}
+.anv-dont{background:color-mix(in srgb,var(--color-coral) 15%,transparent)}
+.anv-dont p{text-decoration:line-through;text-decoration-color:var(--color-coral)}
+.anv-voice .anv-card .p-m{margin-top:0}
+.anv-motion{margin-top:var(--gap-l);height:3.5em;border-radius:2em;background:var(--color-neutral-700);position:relative;overflow:hidden}
+.anv-motion i{position:absolute;top:.5em;left:.5em;width:2.5em;height:2.5em;border-radius:50%;background:var(--color-electric);animation:anvMove 2.4s cubic-bezier(.19,1,.22,1) infinite alternate}
+@keyframes anvMove{to{left:calc(100% - 3em)}}
+@media (max-width:991px){.anv-grid.is--4{grid-template-columns:repeat(2,1fr)}.anv-grid.is--6{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:767px){.anv-grid.is--4,.anv-grid.is--6{grid-template-columns:repeat(2,1fr)}.anv-ts,.anv-btnrow{grid-template-columns:1fr}.anv-ts__sample{font-size:min(var(--ts),2.6em)}.anv-space{grid-template-columns:7.5em 3.5em 1fr}}
 @media (max-width:991px){.anv-grid,.anv-steps{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){
  .anv-hero{padding-top:9em}
@@ -234,6 +277,7 @@ if(!f.checkValidity()){f.reportValidity();return}
 /* TODO: send the form data to your form service / CRM here */
 f.classList.add('is--sent');},true);
 function prefill(){var p=new URLSearchParams(location.search).get('plan');var s=document.querySelector('form.anv-form select[name=plan]');if(p&&s){s.value=p}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;var v=b.getAttribute('data-copy');var done=function(){var l=b.querySelector('.anv-sw__chip .eyebrow');if(l){l.textContent='Copied '+v;setTimeout(function(){l.textContent='Copy'},1400)}b.classList.add('is--copied');setTimeout(function(){b.classList.remove('is--copied')},1400)};if(navigator.clipboard){navigator.clipboard.writeText(v).then(done,done)}else{done()}});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -674,6 +718,199 @@ for slug, (title, parts) in LEGAL.items():
     prose = NOTE + "".join(f"<h2>{E(h)}</h2>" + ("<ul>" + "".join(f"<li>{E(x)}</li>" for x in ps) + "</ul>" if len(ps) > 1 else f"<p>{E(ps[0])}</p>") for h, ps in parts)
     body = hero("Legal", "Last updated 2026", title, "How Anvora handles this topic, explained as clearly as possible.") + section(f'<div class="anv-prose">{prose}</div>')
     write(f"/legal/{slug}", page(slug, title, f"Anvora {title}.", body, cta=False))
+
+# ------------------------------------------------------------------ brand guidelines
+_mark_path = re.search(r' d="([^"]+)"', open(os.path.join(SITE, "images", "anvora-mark.svg"), encoding="utf-8").read()).group(1)
+def MARK(color="currentColor", w="100%"):
+    return f'<svg viewBox="0 0 1426 1320" width="{w}" aria-label="Anvora logo mark"><path fill="{color}" d="{_mark_path}"/></svg>'
+_wm = re.search(r'<svg[^>]*class="nav-logo__wordmark-svg"[^>]*>.*?</svg>', home, flags=re.S)
+WORDMARK = re.sub(r' class="[^"]*"', "", _wm.group(0)) if _wm else "<strong>anvora</strong>"
+
+def _lum(hexc):
+    r, g, b = (int(hexc[i:i + 2], 16) / 255 for i in (1, 3, 5))
+    f = lambda c: c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+def contrast(a, b):
+    la, lb = sorted((_lum(a), _lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+def rgb(h): return ", ".join(str(int(h[i:i + 2], 16)) for i in (1, 3, 5))
+
+BRAND_COLORS = [
+    ("Anvora Purple", "#6840FF", "--color-purple", "Primary accent. Key actions, highlights, stat tiles."),
+    ("Electric Lime", "#A1FF62", "--color-electric", "Energy accent. Main call-to-action buttons, numbers on dark."),
+    ("Signal Coral", "#F84131", "--color-coral", "Use sparingly for urgency or a single highlight per page."),
+    ("Ink", "#201D1D", "--color-dark", "Primary text and dark sections."),
+    ("Paper", "#F4F4F4", "--color-light", "Default page background."),
+    ("White", "#FFFFFF", "--color-white", "Cards, forms and surfaces on Paper."),
+]
+NEUTRALS = [("Neutral 300", "#EAEAEA", "--color-neutral-300"), ("Neutral 450", "#D8D8D8", "--color-neutral-450"),
+            ("Neutral 500", "#817F7F", "--color-neutral-500"), ("Neutral 600", "#312E2E", "--color-neutral-600"),
+            ("Neutral 700", "#2A2727", "--color-neutral-700"), ("Neutral 900", "#151313", "--color-neutral-900")]
+
+def swatch(name, hx, var, use=None, big=True):
+    fg = "#201D1D" if contrast(hx, "#201D1D") >= contrast(hx, "#FFFFFF") else "#FFFFFF"
+    border = "box-shadow:inset 0 0 0 1px var(--color-neutral-450);" if hx in ("#FFFFFF", "#F4F4F4", "#EAEAEA") else ""
+    u = f'<p class="p-s" style="opacity:.75;margin-top:.6em">{E(use)}</p>' if use else ""
+    return (f'<button type="button" class="anv-sw{" is--big" if big else ""}" data-copy="{hx}" title="Click to copy {hx}">'
+            f'<span class="anv-sw__chip" style="background:{hx};color:{fg};{border}"><span class="eyebrow">Copy</span></span>'
+            f'<span class="anv-sw__info"><strong class="h-xs">{E(name)}</strong>'
+            f'<span class="anv-sw__codes"><span>{hx}</span><span>RGB {rgb(hx)}</span><span>var({var})</span></span>{u}</span></button>')
+
+def pair(bg, fg, label):
+    r = contrast(bg, fg)
+    grade = "AAA" if r >= 7 else "AA" if r >= 4.5 else "AA large" if r >= 3 else "Avoid"
+    return (f'<div class="anv-pair" style="background:{bg};color:{fg}"><span class="h-s">Aa</span>'
+            f'<span class="p-s">{E(label)}</span><span class="eyebrow">{r:.1f}:1 · {grade}</span></div>')
+
+TYPE_SCALE = [("h-xxl", "Display XXL", "9.375em", "Haffer XH", "Hero statements"),
+              ("h-xl", "Display XL", "7em", "Haffer XH", "Page titles"),
+              ("h-l", "Heading L", "5em", "Haffer XH", "Section titles"),
+              ("h-ml", "Heading ML", "3.875em", "Haffer XH", "Large callouts"),
+              ("h-m", "Heading M", "2.5em", "Haffer XH", "Sub-sections"),
+              ("h-s", "Heading S", "1.875em", "Haffer XH", "Card titles"),
+              ("h-xs", "Heading XS", "1.25em", "Haffer VF", "Small titles, list headings"),
+              ("p-l", "Body L", "1.1875em", "Haffer VF", "Intros and lead paragraphs"),
+              ("p-m", "Body M", "1em", "Haffer VF", "Default body text"),
+              ("p-s", "Body S", ".875em", "Haffer VF", "Captions and fine print"),
+              ("eyebrow", "Label", ".6875em", "Haffer Mono", "Eyebrows, tags, metadata (uppercase)")]
+type_rows = "".join(
+    f'<div class="anv-ts"><div class="anv-ts__meta"><span class="eyebrow">{E(n)}</span><span class="p-s">.{c} · {s} · {E(f)}</span>'
+    f'<span class="p-s anv-muted">{E(u)}</span></div><div class="{c} anv-ts__sample">Built to grow</div></div>'
+    for c, n, s, f, u in TYPE_SCALE)
+
+FONTS = [("Haffer XH", "Haffer XH,Arial,sans-serif", "Display", "Headlines and big statements. Tight letter-spacing (−0.03em to −0.06em), line-height around 1."),
+         ("Haffer VF", "Haffer VF,Arial,sans-serif", "Text & UI", "Body copy, buttons and navigation. Variable font, weights 100–1000. Body uses about 420–430."),
+         ("Haffer Mono", "Haffer Mono,Arial,sans-serif", "Labels", "Eyebrows, tags and data. Always uppercase at small sizes.")]
+font_cards = "".join(
+    f'<div class="anv-font"><span class="eyebrow anv-muted">{E(role)}</span><div style="font-family:{ff};font-size:6em;line-height:1;letter-spacing:-.04em">Aa</div>'
+    f'<h3 class="h-s">{E(name)}</h3><p class="p-m anv-muted">{E(desc)}</p>'
+    f'<p style="font-family:{ff};font-size:1.1em;line-height:1.5;word-break:break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 € % &amp; @ ?</p></div>'
+    for name, ff, role, desc in FONTS)
+
+BTNS_LIGHT = [("Primary", "electric", "The main action on a page. One per view where possible."),
+              ("Secondary", "purple", "Strong supporting actions."),
+              ("Neutral", "neutral-200", "Low-emphasis actions, such as See pricing."),
+              ("Dark", "neutral-800", "Actions on light cards that need weight."),
+              ("Highlight", "coral", "Rare, attention-grabbing actions only.")]
+btn_rows = "".join(f'<div class="anv-btnrow"><div class="anv-row">{btn(lbl, "#", v)}</div><div><strong class="p-m">{E(lbl)}</strong>'
+                   f'<p class="p-s anv-muted">{E(d)} <code>variant="{v}"</code></p></div></div>' for lbl, v, d in BTNS_LIGHT)
+
+SPACING = [("--gap-xxs", ".5em"), ("--gap-xs", ".75em"), ("--gap-s", "1em"), ("--gap-sm", "1.25em"), ("--gap-m", "1.5em"),
+           ("--gap-l", "1.875em"), ("--gap-xl", "2em"), ("--gap-xxl", "2.5em"), ("--padding-xs", "3.75em"),
+           ("--padding-s", "5em"), ("--padding-m", "7.5em"), ("--padding-l", "10em"), ("--padding-xl", "12.5em")]
+space_rows = "".join(f'<div class="anv-space"><code>{t}</code><span class="p-s anv-muted">{v}</span><i style="width:var({t})"></i></div>' for t, v in SPACING)
+
+VOICE = [("Clear over clever", "Say what we do and what it means for the client.", "We grow your leads with search and social ads.", "We leverage synergistic omnichannel paradigms."),
+         ("Confident, not hype", "Back claims with process and numbers, never exaggeration.", "We test new ads every week and report what works.", "Guaranteed 10x results overnight!"),
+         ("Honest", "Be upfront about what we know, what we don't, and what things cost.", "SEO usually takes three to six months to show results.", "Rank #1 on Google in days."),
+         ("Human", "Write like a smart friend: warm, direct, short sentences.", "Tell us about your goals. We'll come back with ideas.", "Please submit your enquiry via the form below.")]
+voice_cards = "".join(
+    f'<div class="anv-card"><h3 class="h-s">{E(t)}</h3><p class="p-m">{E(d)}</p>'
+    f'<div class="anv-do"><span class="eyebrow">Do</span><p class="p-m">{E(do)}</p></div>'
+    f'<div class="anv-dont"><span class="eyebrow">Don\'t</span><p class="p-m">{E(dont)}</p></div></div>' for t, d, do, dont in VOICE)
+
+def bsec(num, eyebrow, title, inner, dark=False, sub=None, sid=None):
+    s = f'<p class="p-l anv-muted" style="max-width:36em;margin-top:1em">{E(sub)}</p>' if sub else ""
+    return (f'<section id="{sid}" data-theme-section="{"dark" if dark else "light"}" class="anv-sec{" is--dark" if dark else ""}" style="scroll-margin-top:6em">'
+            f'<div class="anv-wrap"><div class="anv-head"><span class="eyebrow">{num} — {E(eyebrow)}</span><h2 class="h-l">{E(title)}</h2>{s}</div>{inner}</div></section>')
+
+TOC = [("logo", "Logo"), ("colour", "Colour"), ("type", "Typography"), ("buttons", "Buttons"), ("components", "Components"),
+       ("spacing", "Spacing"), ("voice", "Tone of voice"), ("imagery", "Imagery & motion")]
+toc = '<div class="anv-row" style="justify-content:center;margin-top:var(--gap-xxl)">' + "".join(
+    f'<a href="#{i}" class="anv-pill" data-barba-prevent="">{E(t)}</a>' for i, t in TOC) + "</div>"
+
+logo_sec = bsec("01", "Logo", "Our logo", (
+    '<div class="anv-grid">'
+    f'<div class="anv-logo c-light"><div class="anv-logo__mark">{MARK("#201D1D")}</div><span class="eyebrow">Mark on Paper</span></div>'
+    f'<div class="anv-logo c-dark"><div class="anv-logo__mark">{MARK("#FFFFFF")}</div><span class="eyebrow">Mark on Ink</span></div>'
+    f'<div class="anv-logo c-purple"><div class="anv-logo__mark">{MARK("#A1FF62")}</div><span class="eyebrow">Mark on Purple</span></div>'
+    '</div>'
+    f'<div class="anv-grid is--2" style="margin-top:var(--gap-s)"><div class="anv-logo c-light"><div class="anv-logo__wm" style="color:#201D1D">{WORDMARK}</div><span class="eyebrow">Wordmark</span></div>'
+    f'<div class="anv-logo c-electric"><div class="anv-logo__lockup" style="color:#201D1D"><span>{MARK()}</span><span>{WORDMARK}</span></div><span class="eyebrow">Lockup: mark + wordmark</span></div></div>'
+    '<div class="anv-grid" style="margin-top:var(--gap-s)">'
+    '<div class="anv-card"><span class="eyebrow">Clear space</span><h3 class="h-s">Give it room</h3><p class="p-m">Keep empty space around the logo equal to at least half the height of the mark on every side.</p></div>'
+    '<div class="anv-card"><span class="eyebrow">Minimum size</span><h3 class="h-s">Stay legible</h3><p class="p-m">Mark: at least 16px tall on screen (favicon). Wordmark: at least 80px wide.</p></div>'
+    '<div class="anv-card"><span class="eyebrow">Don\'t</span><h3 class="h-s">Keep it intact</h3><p class="p-m">Don\'t stretch, rotate, outline, add shadows to, or recolour the logo outside the brand palette.</p></div>'
+    '</div>'
+    '<div class="anv-row" style="margin-top:var(--gap-l)">'
+    f'{btn("Download mark (SVG)", "/images/anvora-mark.svg", "neutral-800")}{btn("Download favicon (SVG)", "/images/anvora-favicon.svg", "neutral-300")}</div>'),
+    sid="logo")
+logo_sec = logo_sec.replace('href="/images/anvora-mark.svg"', 'href="/images/anvora-mark.svg" download data-barba-prevent=""').replace(
+    'href="/images/anvora-favicon.svg"', 'href="/images/anvora-favicon.svg" download data-barba-prevent=""')
+
+colour_sec = bsec("02", "Colour", "Colour palette", (
+    f'<div class="anv-grid">{"".join(swatch(*c) for c in BRAND_COLORS)}</div>'
+    f'<h3 class="h-s" style="margin:var(--padding-xs) 0 1em">Neutrals</h3><div class="anv-grid is--6">{"".join(swatch(n, h, v, big=False) for n, h, v in NEUTRALS)}</div>'
+    '<h3 class="h-s" style="margin:var(--padding-xs) 0 1em">Balance</h3>'
+    '<div class="anv-ratio"><i style="flex:60;background:var(--color-light);color:var(--color-dark)">Paper 60%</i>'
+    '<i style="flex:25;background:var(--color-dark);color:var(--color-light)">Ink 25%</i><i style="flex:8;background:var(--color-purple);color:#fff">Purple 8%</i>'
+    '<i style="flex:5;background:var(--color-electric);color:var(--color-dark)">Lime</i><i style="flex:2;background:var(--color-coral)"></i></div>'
+    '<h3 class="h-s" style="margin:var(--padding-xs) 0 1em">Accessible pairings</h3>'
+    '<div class="anv-grid is--4">'
+    + pair("#F4F4F4", "#201D1D", "Ink on Paper") + pair("#201D1D", "#A1FF62", "Lime on Ink") + pair("#6840FF", "#FFFFFF", "White on Purple")
+    + pair("#A1FF62", "#201D1D", "Ink on Lime") + pair("#201D1D", "#F4F4F4", "Paper on Ink") + pair("#F84131", "#FFFFFF", "White on Coral")
+    + pair("#FFFFFF", "#6840FF", "Purple on White") + pair("#F4F4F4", "#817F7F", "Neutral 500 on Paper") + '</div>'
+    '<p class="p-s anv-muted" style="margin-top:1em">Contrast ratios follow WCAG 2.1. AA needs 4.5:1 for body text, or 3:1 for large text (24px+, or 19px+ bold).</p>'),
+    sub="Click any colour to copy its hex code.", sid="colour")
+
+type_sec = bsec("03", "Typography", "Typography", (
+    f'<div class="anv-grid">{font_cards}</div>'
+    f'<h3 class="h-s" style="margin:var(--padding-xs) 0 1em">Type scale</h3><div class="anv-tscale">{type_rows}</div>'
+    '<p class="p-s anv-muted" style="margin-top:1em">Sizes are in em, relative to the page\'s base size, which scales with the screen width. '
+    'Haffer is a commercial typeface: make sure Anvora holds a web licence before launch.</p>'),
+    sid="type")
+
+buttons_sec = bsec("04", "Buttons", "Buttons", (
+    f'<div class="anv-btns">{btn_rows}</div>'
+    '<div class="anv-onDark"><span class="eyebrow">On dark backgrounds</span><div class="anv-row" style="margin-top:1em">'
+    f'{btn("Primary", "#", "electric")}{btn("Secondary", "#", "purple")}{btn("Subtle", "#", "neutral-600")}{btn("Ghost", "#", "light-10")}</div></div>'
+    '<div class="anv-grid" style="margin-top:var(--gap-s)">'
+    '<div class="anv-card"><span class="eyebrow">Labels</span><h3 class="h-s">Start with a verb</h3><p class="p-m">Book a strategy call, See pricing, Claim your audit. Keep it to 1–4 words.</p></div>'
+    '<div class="anv-card"><span class="eyebrow">Hierarchy</span><h3 class="h-s">One primary</h3><p class="p-m">Use one Primary (Lime) button per section, next to at most one Neutral button.</p></div>'
+    '<div class="anv-card"><span class="eyebrow">Motion</span><h3 class="h-s">Rolling labels</h3><p class="p-m">On hover the label rolls up and is replaced by a copy of itself. Hover the buttons above to see it.</p></div>'
+    '</div>').replace('href="#"', 'href="#buttons" data-barba-prevent=""'),
+    sid="buttons")
+
+comp_sec = bsec("05", "Components", "Components", (
+    '<div class="anv-grid">'
+    f'<div><span class="eyebrow anv-muted">Tags</span><div style="margin-top:1em">{tags("Service 01", "Anvora")}</div>'
+    '<span class="eyebrow anv-muted" style="display:block;margin-top:2em">Eyebrow</span><span class="eyebrow" style="margin-top:1em">What we do</span></div>'
+    '<div class="anv-card"><span class="eyebrow">01</span><h3 class="h-s">Card</h3><p class="p-m">White surface on Paper, 0.75em radius, generous padding. For services, features and principles.</p></div>'
+    '<div class="anv-stat" style="min-height:0"><span class="eyebrow">Stat tile</span><div><div class="h-xl">6</div><p class="p-m">Core services. Purple, Lime and Ink tiles rotate.</p></div></div>'
+    '</div>'
+    '<div class="anv-grid is--2" style="margin-top:var(--gap-s)">'
+    '<form class="anv-form" onsubmit="return false"><label><span>Form field</span><input placeholder="Your name"></label>'
+    '<label><span>Select</span><select><option>Starter</option><option>Growth</option></select></label>'
+    '<div class="anv-chips"><label><input type="checkbox" checked> Selected chip</label><label><input type="checkbox"> Chip</label></div></form>'
+    '<div><span class="eyebrow anv-muted">FAQ item</span><div class="anv-faq" style="margin-top:1em"><details open><summary class="h-xs">How long does SEO take?</summary>'
+    '<p class="p-m">Most sites see meaningful movement within three to six months.</p></details><details><summary class="h-xs">Is ad spend included?</summary>'
+    '<p class="p-m">No, ad spend is paid directly to the platforms.</p></details></div></div></div>'),
+    sid="components")
+
+space_sec = bsec("06", "Spacing", "Spacing & shape", (
+    f'<div class="anv-split"><div class="anv-spacing">{space_rows}</div><div class="anv-grid is--2">'
+    '<div class="anv-card" style="border-radius:.4em"><span class="eyebrow">Radius S · .4em</span><p class="p-m">Inputs and small buttons.</p></div>'
+    '<div class="anv-card" style="border-radius:.75em"><span class="eyebrow">Radius M · .75em</span><p class="p-m">Cards, tiles and swatches.</p></div>'
+    '<div class="anv-card" style="border-radius:1em"><span class="eyebrow">Radius L · 1em</span><p class="p-m">Large panels and forms.</p></div>'
+    '<div class="anv-card" style="border-radius:2em"><span class="eyebrow">Pill · 2em</span><p class="p-m">Chips, tags and the navigation bar.</p></div>'
+    '</div></div>'),
+    sub="Spacing uses tokens so every page breathes the same way. Use the smallest token that separates ideas clearly.", sid="spacing")
+
+voice_sec = bsec("07", "Tone of voice", "How we sound", f'<div class="anv-grid is--2">{voice_cards}</div>', sid="voice")
+
+img_sec = bsec("08", "Imagery & motion", "Imagery & motion", (
+    '<div class="anv-grid">'
+    '<div class="anv-card c-light"><span class="eyebrow">Photography</span><h3 class="h-s">Real and close</h3><p class="p-m">Real people, real products and real workspaces. Natural light, close crops, no generic stock handshakes.</p></div>'
+    '<div class="anv-card c-light"><span class="eyebrow">Graphics</span><h3 class="h-s">Bold and simple</h3><p class="p-m">Flat colour blocks from the palette, big numbers and clean UI-style mockups. Avoid gradients and 3D effects.</p></div>'
+    '<div class="anv-card c-light"><span class="eyebrow">Motion</span><h3 class="h-s">Fast, then soft</h3><p class="p-m">Movement starts quickly and eases out (expo.out), lasting about 0.6–1.2 seconds. Text reveals line by line.</p></div>'
+    '</div>'
+    '<div class="anv-motion"><i></i></div>'), dark=True, sid="imagery")
+
+brand_body = (hero("Brand", "Guidelines v1.0", "Brand guidelines",
+                   "Everything you need to use the Anvora brand consistently: logo, colour, typography, buttons, components and tone of voice.")
+              .replace("</div></section>", toc + "</div></section>", 1)
+              + logo_sec + colour_sec + type_sec + buttons_sec + comp_sec + space_sec + voice_sec + img_sec)
+write("/brand", page("brand", "Brand Guidelines", "The Anvora brand guidelines: logo, colours, fonts, buttons and tone of voice.", brand_body, cta=False))
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")

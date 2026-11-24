@@ -15,6 +15,7 @@ Website for **Anvora**, a full-service marketing company.
 | Free Audit | `/audit/` |
 | Insights | `/insights/` |
 | FAQs | `/faq/` |
+| Brand Guidelines | `/brand/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |
 
 ## Run it on your computer
