@@ -10,6 +10,7 @@ Website for **Anvora**, a full-service marketing company.
 | Services | `/services/brand-strategy/`, `/services/performance-marketing/`, `/services/social-media/`, `/services/content-studio/`, `/services/seo-growth/`, `/services/web-landing-pages/` |
 | Our Approach | `/approach/` |
 | Example Plans | `/example-plans/` |
+| Example Approaches (12 industries) | `/example-approaches/` and `/example-approaches/<industry>/` (coffee-shop, roofing-company, dental-clinic, plumbing-heating, hair-salon, real-estate-agent, law-firm, fitness-studio, online-clothing-brand, saas-startup, restaurant, wedding-photographer) |
 | Pricing | `/pricing/` |
 | Contact | `/contact/` |
 | Free Audit | `/audit/` |

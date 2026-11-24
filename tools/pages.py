@@ -82,9 +82,338 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
                     '<li class="footer-link__col-li"><a data-underline-link="" href="/services/web-landing-pages" class="p-m">Web &amp; Landing Pages</a>')
 
 # footer column headings
-home = re.sub(r'(>Support</a></li>)', r'<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
+home = re.sub(r'(>Support</a></li>)', r'\1<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
+
+# ------------------------------------------------------------------ example approaches (by industry; not past clients)
+A = lambda **k: k
+APPROACHES = [
+ A(slug="coffee-shop", short="Coffee Shop", name="Local coffee shop", cat="Local business", color="c-electric",
+   goal="More regulars, every week",
+   intro="How we would help an independent coffee shop turn passers-by into regulars, using local search, short-form video and a simple loyalty loop.",
+   channels=["Google Business Profile", "Instagram & TikTok", "Loyalty & email"],
+   situation=["Great coffee, but the shop barely shows up when people nearby search for “coffee near me”.",
+              "Social posts are irregular and mostly photos of cups, so they get little reach.",
+              "Lots of one-time visitors, with no easy way to bring them back."],
+   audiences=[("Morning commuters", "Want speed and consistency. They decide in seconds, usually from Google Maps."),
+              ("Remote workers", "Look for wifi, seats and plugs. They stay for hours and come back if they feel welcome."),
+              ("Weekend locals", "Want a treat and a place to meet friends. Discover new spots on Instagram and TikTok.")],
+   phases=[("Weeks 1–2", "Get found", "Fix the Google Business Profile: hours, menu, photos, categories and a plan for getting honest reviews."),
+           ("Weeks 3–4", "Find the story", "Shoot a month of short videos in one morning: the roast, the team, the regulars, the signature drink."),
+           ("Weeks 5–8", "Build the habit", "Launch a simple digital stamp card and a weekly email or SMS with one reason to visit."),
+           ("Weeks 9–12", "Grow the reach", "Small, tightly targeted local ads around the shop, plus one collaboration with a nearby business.")],
+   tactics=[("Google Maps first", "Most local coffee decisions start on a map, so the profile is treated like the shop window."),
+            ("Weekly video series", "One recurring format, like “drink of the week”, that is easy to film and easy to recognise."),
+            ("Review routine", "A small card at the till and a follow-up message that make leaving a review effortless."),
+            ("Quiet-hour offers", "Offers aimed at the slowest hours of the day, so promotions fill empty seats instead of busy ones."),
+            ("Local partnerships", "Cross-promotion with gyms, offices and shops within walking distance."),
+            ("Loyalty that feels personal", "A stamp card plus a birthday drink, so regulars feel noticed.")],
+   ad=("Sponsored · Within 2 km", "Your new morning stop is 3 minutes away", "Freshly roasted beans, fast service and the best flat white on the street. Show this ad for a free pastry with your first coffee.", "Get directions"),
+   post=("Reel idea", "“From bean to cup in 30 seconds”: a fast, satisfying video of the morning roast, with the barista explaining today’s special."),
+   offer=("Email subject line", "Your 5th coffee is on us this week ☕"),
+   kpis=["Google Maps direction requests", "Calls and profile views", "Reviews per month", "Loyalty sign-ups", "Repeat visits"],
+   services=["social-media", "seo-growth", "content-studio"]),
+
+ A(slug="roofing-company", short="Roofing Company", name="Roofing company", cat="Home services", color="c-coral",
+   goal="More quote requests from the right jobs",
+   intro="How we would help a roofing company win more high-value quote requests in its service area, and stop relying only on word of mouth.",
+   channels=["Google Search Ads", "Local SEO", "Before & after content"],
+   situation=["Most work comes from referrals, so the pipeline goes quiet without warning.",
+              "The website looks dated and doesn’t make it easy to request a quote from a phone.",
+              "Competitors appear above them in Google when homeowners search after a storm."],
+   audiences=[("Urgent repairs", "A leak or storm damage. They want someone fast and trustworthy, and usually call the first good result."),
+              ("Planned replacements", "Older roofs. They compare three quotes and care about warranties, reviews and clear pricing."),
+              ("Property managers", "Look after several buildings. They value reliability, reporting and fast response times.")],
+   phases=[("Weeks 1–2", "Fix the foundations", "Set up call and form tracking, clean up the Google Business Profile and audit the current website."),
+           ("Weeks 3–4", "Build the quote page", "A fast landing page with photos of real jobs, reviews, guarantees and a 3-step quote form."),
+           ("Weeks 5–8", "Launch search ads", "High-intent search campaigns for repair and replacement terms, split by town in the service area."),
+           ("Weeks 9–12", "Earn trust at scale", "A steady flow of before & after posts, review requests after every job and local SEO pages for each town.")],
+   tactics=[("Intent-only keywords", "Ads target searches like “roof leak repair”, not broad terms that attract job seekers or DIY fans."),
+            ("Emergency call extension", "A click-to-call button on every ad and page for urgent jobs."),
+            ("Town-by-town pages", "Separate pages for each area served, so the business ranks where it actually works."),
+            ("Before & after proof", "Photos from every job turned into posts, ads and website galleries."),
+            ("Storm-ready campaigns", "Pre-built ads that can be switched on within an hour after severe weather."),
+            ("Fast follow-up", "Missed calls and forms trigger an instant text, so leads don’t go to the next roofer.")],
+   ad=("Ad · Search result", "Roof Leak? Same-Day Inspection", "Local, insured roofers. Free written quotes, clear pricing and a workmanship guarantee. Call now or book online in 60 seconds.", "Request a quote"),
+   post=("Post idea", "A side-by-side before & after of a recent roof, with a 15-second clip of the crew explaining what was wrong and how it was fixed."),
+   offer=("Landing page headline", "A roof you won’t have to think about for 25 years."),
+   kpis=["Quote requests", "Cost per qualified lead", "Phone calls from ads", "Quote-to-job rate", "Google reviews"],
+   services=["performance-marketing", "web-landing-pages", "seo-growth"]),
+
+ A(slug="dental-clinic", short="Dental Clinic", name="Dental clinic", cat="Health & wellness", color="c-purple",
+   goal="More new patients for high-value treatments",
+   intro="How we would help a dental clinic attract new patients, especially for treatments like implants, aligners and whitening, while keeping the tone calm and trustworthy.",
+   channels=["Google Search Ads", "Local SEO", "Email & reminders"],
+   situation=["The diary is full of check-ups, but there are few enquiries for higher-value treatments.",
+              "Many patients are nervous, and the website doesn’t speak to that.",
+              "Online booking exists, but it is hard to find and drops people halfway through."],
+   audiences=[("Nervous patients", "Have avoided the dentist for years. They need reassurance before they book."),
+              ("Smile upgraders", "Interested in aligners or whitening. They research a lot and compare prices online."),
+              ("Busy families", "Want one practice for everyone, with easy booking and evening appointments.")],
+   phases=[("Weeks 1–2", "Listen and audit", "Review enquiries, the booking flow and patient reviews to understand what patients worry about."),
+           ("Weeks 3–4", "Treatment pages", "Clear, friendly pages for each key treatment, with prices from, FAQs and a short video from the dentist."),
+           ("Weeks 5–8", "Targeted search", "Search campaigns for treatment terms, sending people to the matching page with an easy consultation form."),
+           ("Weeks 9–12", "Nurture and recall", "Email follow-ups for people who enquired but didn’t book, and reminders that bring existing patients back.")],
+   tactics=[("Calm, human tone", "Real photos of the team and plain-language explanations instead of clinical jargon."),
+            ("Transparent prices", "Showing “from” prices and payment plans upfront removes the biggest reason people don’t enquire."),
+            ("Free consultation offer", "A low-pressure first step for high-value treatments."),
+            ("Review strategy", "Asking happy patients for reviews at the right moment, in line with healthcare advertising rules."),
+            ("Booking flow fixes", "Fewer steps and a mobile-friendly form so fewer people drop off."),
+            ("Recall emails", "Friendly reminders that keep check-ups booked and the diary steady.")],
+   ad=("Ad · Search result", "Clear Aligners · Free Consultation", "See your new smile before you start. Friendly local team, flexible payment plans and evening appointments.", "Book a free consult"),
+   post=("Video idea", "“What actually happens at your first visit”: a calm walkthrough of the clinic, filmed from the patient’s point of view."),
+   offer=("Email subject line", "Still thinking about straighter teeth? Here’s what it costs"),
+   kpis=["Consultation bookings", "Cost per new patient", "Treatment enquiries", "Booking completion rate", "Recall bookings"],
+   services=["performance-marketing", "seo-growth", "web-landing-pages"]),
+
+ A(slug="plumbing-heating", short="Plumber & Heating", name="Plumbing & heating company", cat="Home services", color="c-dark",
+   goal="A steady flow of booked jobs",
+   intro="How we would help a plumbing and heating business fill its calendar with profitable jobs, from emergency call-outs to boiler installs.",
+   channels=["Local Services & Search Ads", "Google Business Profile", "Service plans"],
+   situation=["Busy in winter, quiet in summer, so income goes up and down all year.",
+              "Most leads are small jobs, while boiler installs and bathroom refits are rare.",
+              "Calls are missed when the team is on site, and those customers ring someone else."],
+   audiences=[("Emergencies", "Burst pipe or no hot water. They want the fastest trustworthy option right now."),
+              ("Planned upgrades", "New boiler or bathroom. They compare quotes and want clear prices and finance options."),
+              ("Landlords", "Need safety checks and reliable repairs across several properties every year.")],
+   phases=[("Weeks 1–2", "Stop losing leads", "Call tracking, a missed-call text-back and a cleaned-up Google Business Profile."),
+           ("Weeks 3–4", "Split the services", "Separate pages and campaigns for emergencies, boiler installs and bathrooms, each with its own offer."),
+           ("Weeks 5–8", "Launch and test", "Search and local service ads by job type, with budgets shifted toward the jobs that pay best."),
+           ("Weeks 9–12", "Smooth the seasons", "An annual service plan, promoted to past customers by email and SMS before the busy season.")],
+   tactics=[("Job-type campaigns", "Different ads and budgets for emergencies and installs, because their value is very different."),
+            ("Missed-call text-back", "An automatic reply so the customer knows they will get a call back."),
+            ("Finance messaging", "Monthly payment options shown upfront for big-ticket installs."),
+            ("Service plan offer", "Recurring income from annual boiler services and landlord safety checks."),
+            ("Review requests", "A text after every job asking for a review, with a direct link."),
+            ("Seasonal timing", "Heating campaigns start before the first cold week, not after it.")],
+   ad=("Ad · Search result", "Boiler Broken? Engineers Near You Today", "Gas Safe registered local engineers. Fixed call-out price, no hidden fees and 12-month guarantee on all repairs.", "Call now"),
+   post=("Post idea", "“3 signs your boiler is about to give up”: a quick tip video from one of the engineers, ending with the annual service offer."),
+   offer=("SMS to past customers", "Winter is coming. Book your boiler service now and get 10% off before 31 October."),
+   kpis=["Booked jobs", "Cost per booked job", "Install enquiries", "Service plan sign-ups", "Missed calls recovered"],
+   services=["performance-marketing", "seo-growth", "web-landing-pages"]),
+
+ A(slug="hair-salon", short="Hair & Beauty Salon", name="Hair & beauty salon", cat="Local business", color="c-coral",
+   goal="A fuller booking diary",
+   intro="How we would help a salon fill quiet days, attract new clients who love its style and keep existing clients rebooking.",
+   channels=["Instagram & TikTok", "Online booking", "Email & SMS"],
+   situation=["Weekends are full, but Tuesdays and Wednesdays are often empty.",
+              "Beautiful work, but the Instagram feed isn’t turning followers into bookings.",
+              "Clients often forget to rebook, so the gap between visits keeps getting longer."],
+   audiences=[("Style seekers", "Follow trends on Instagram and TikTok. They choose a salon by its portfolio."),
+              ("Busy professionals", "Want easy online booking, lunchtime or evening slots and no surprises on price."),
+              ("Special occasions", "Weddings, proms and events. They plan ahead and book for groups.")],
+   phases=[("Weeks 1–2", "Make booking easy", "Booking links everywhere: Instagram bio, Google profile, website and every post."),
+           ("Weeks 3–4", "Show the work", "A content plan built around transformations, stylist profiles and the salon experience."),
+           ("Weeks 5–8", "Fill quiet days", "Midweek offers for new clients, promoted with small local ads to the right age group and area."),
+           ("Weeks 9–12", "Keep them coming", "Automatic rebooking reminders and a referral reward for clients who bring a friend.")],
+   tactics=[("Transformation reels", "Short before & after videos, the format that gets the most reach for salons."),
+            ("Stylist spotlights", "Each stylist gets their own content, so clients connect with a person."),
+            ("Midweek offers", "Discounts only on quiet days, so the busy days stay full price."),
+            ("Rebooking reminders", "A message at the right time for each service, like 6 weeks after a colour."),
+            ("Referral rewards", "A thank-you for clients who bring a friend, and a welcome for the friend."),
+            ("Bridal packages", "A dedicated page and enquiry form for weddings and events.")],
+   ad=("Sponsored · Instagram", "New in town? Your first colour is 20% off", "Lived-in blondes, glossy brunettes and cuts that grow out beautifully. Midweek appointments available.", "Book now"),
+   post=("Reel idea", "A 15-second colour transformation set to a trending sound, with the stylist naming the exact shade in the caption."),
+   offer=("SMS reminder", "Hi Sam, it’s been 6 weeks since your colour. Want your usual Thursday slot?"),
+   kpis=["Online bookings", "Midweek fill rate", "New clients", "Rebooking rate", "Instagram profile clicks"],
+   services=["social-media", "content-studio", "brand-strategy"]),
+
+ A(slug="real-estate-agent", short="Real Estate Agent", name="Real estate agent", cat="Property", color="c-light",
+   goal="More valuation requests from sellers",
+   intro="How we would help a local real estate agent stand out in a crowded market and win more seller instructions.",
+   channels=["Brand positioning", "Meta Ads", "Local content"],
+   situation=["Every agent in the area looks and sounds the same, so sellers choose on fees.",
+              "Listings get views, but few homeowners ask for a valuation.",
+              "There is no system to stay in touch with people who might sell in a year or two."],
+   audiences=[("Ready sellers", "Planning to sell soon. They want a confident valuation and an agent they trust."),
+              ("Curious owners", "Not ready yet, but want to know what their home is worth."),
+              ("Landlords & investors", "Looking for rental management, yield advice and off-market deals.")],
+   phases=[("Weeks 1–2", "Find the difference", "Positioning work to define what makes this agent genuinely different, and how to say it."),
+           ("Weeks 3–4", "Valuation funnel", "An instant online valuation tool and landing page, with a follow-up from a real agent."),
+           ("Weeks 5–8", "Local visibility", "Ads to homeowners in target streets, plus a monthly local market video."),
+           ("Weeks 9–12", "Long-term nurture", "A monthly email with local prices and sold homes, keeping the agent top of mind.")],
+   tactics=[("Clear positioning", "One strong reason to choose this agent, used consistently across every touchpoint."),
+            ("Instant valuation", "A low-effort first step that turns curious owners into leads."),
+            ("Hyper-local content", "Street-level market updates that show real local knowledge."),
+            ("Sold-home stories", "Each sale turned into a short case story with the seller’s permission."),
+            ("Retargeting", "Gentle reminders for people who visited the valuation page but didn’t finish."),
+            ("Agent personal brands", "Agents become familiar faces in the area through short video.")],
+   ad=("Sponsored · Facebook", "What is your home worth in today’s market?", "Get a free, no-obligation valuation from a local expert who has sold on your street. Takes 2 minutes.", "Get my valuation"),
+   post=("Video idea", "“What sold on your street this month”: a 45-second market update filmed walking through the neighbourhood."),
+   offer=("Email subject line", "Homes near you sold 4% above asking last month"),
+   kpis=["Valuation requests", "Cost per valuation", "Instructions won", "Email list growth", "Market-update views"],
+   services=["brand-strategy", "performance-marketing", "content-studio"]),
+
+ A(slug="law-firm", short="Law Firm", name="Small law firm", cat="Professional services", color="c-dark",
+   goal="More qualified consultations",
+   intro="How we would help a small law firm attract the right clients for its main practice areas, with a professional, trustworthy presence online.",
+   channels=["SEO & content", "Google Search Ads", "Reviews & reputation"],
+   situation=["Most enquiries are not a good fit, which wastes a lot of partner time.",
+              "The website talks about the firm, not about the client’s problem.",
+              "Search ads are expensive, and there is no clear idea of which ones bring clients."],
+   audiences=[("People in a hard moment", "Facing a divorce, a dispute or a loss. They need clarity and empathy first."),
+              ("Small business owners", "Need contracts, employment advice or help with a dispute. They value speed and fixed fees."),
+              ("Referrers", "Accountants and other advisers who send clients when they trust the firm.")],
+   phases=[("Weeks 1–2", "Focus", "Pick the 2–3 most valuable practice areas and define the ideal client for each."),
+           ("Weeks 3–4", "Rewrite for clients", "Practice-area pages that explain the problem, the process and the costs in plain language."),
+           ("Weeks 5–8", "Search, carefully", "A tightly controlled search campaign with intake questions that filter out poor-fit enquiries."),
+           ("Weeks 9–12", "Build authority", "Helpful guides that answer common questions and rank in search over time.")],
+   tactics=[("Plain-language pages", "Clients understand what will happen, how long it takes and what it may cost."),
+            ("Qualifying intake form", "A few smart questions save hours of unsuitable consultations."),
+            ("Fixed-fee offers", "Clear packages for common needs make it easier to say yes."),
+            ("Helpful guides", "Answers to the questions people search for, written by the lawyers themselves."),
+            ("Reputation management", "A steady, compliant process for collecting reviews."),
+            ("Referral partner updates", "A short quarterly update to accountants and advisers who refer clients.")],
+   ad=("Ad · Search result", "Employment Lawyer · Fixed-Fee First Call", "Unfairly dismissed? Speak to a specialist employment lawyer. Clear advice, fixed fees, no jargon.", "Book a consultation"),
+   post=("LinkedIn idea", "A short post from a partner: “3 clauses every small business contract should have”, with a downloadable checklist."),
+   offer=("Guide title", "Getting divorced: a step-by-step guide to the process and the costs"),
+   kpis=["Qualified consultations", "Cost per qualified enquiry", "Consultation-to-client rate", "Organic traffic to guides", "Reviews"],
+   services=["seo-growth", "performance-marketing", "web-landing-pages"]),
+
+ A(slug="fitness-studio", short="Gym & Fitness Studio", name="Gym or fitness studio", cat="Health & wellness", color="c-electric",
+   goal="More trial sign-ups that become members",
+   intro="How we would help a gym or boutique fitness studio fill its classes with new members, and keep them coming back after the first month.",
+   channels=["Meta Ads", "Landing page & funnel", "Community content"],
+   situation=["A January rush, then sign-ups drop for the rest of the year.",
+              "Free trials bring people in, but few of them become paying members.",
+              "The studio has a great community that nobody outside can see."],
+   audiences=[("Beginners", "Want to get fit but feel intimidated. They need to see people like them."),
+              ("Switchers", "Already train elsewhere. They want better coaching, better classes or a better vibe."),
+              ("Busy parents", "Short on time. They want quick, effective sessions at the right times.")],
+   phases=[("Weeks 1–2", "Fix the funnel", "A simple trial landing page, a booking flow and tracking from ad to first class."),
+           ("Weeks 3–4", "Show the community", "Content that features real members, coaches and the energy of a class."),
+           ("Weeks 5–8", "Trial campaigns", "Ads for a clear trial offer, targeted to people within a short drive of the studio."),
+           ("Weeks 9–12", "Trial to member", "A follow-up sequence of messages and a coach check-in during the trial period.")],
+   tactics=[("One clear offer", "A single, easy trial offer instead of many confusing deals."),
+            ("Member stories", "Real people sharing why they joined. The most convincing content for beginners."),
+            ("Trial follow-up", "Messages before and after the first class so people actually show up and come back."),
+            ("Local targeting", "Ads only to people who live or work close enough to train regularly."),
+            ("Challenge campaigns", "A 6-week challenge to create a second January in spring and autumn."),
+            ("Referral nights", "Members bring a friend for free, building the community from within.")],
+   ad=("Sponsored · Instagram", "Your first week is free. No pressure.", "Small group classes, friendly coaches and a plan built around you. Beginners very welcome.", "Claim free week"),
+   post=("Reel idea", "“Your first class, explained”: a coach walks through what happens, from the warm-up to the high-fives at the end."),
+   offer=("Trial follow-up SMS", "Great work today, Alex! Same time Thursday? Here’s your next class link."),
+   kpis=["Trial sign-ups", "Cost per trial", "Trial show-up rate", "Trial-to-member rate", "Member retention"],
+   services=["performance-marketing", "web-landing-pages", "social-media"]),
+
+ A(slug="online-clothing-brand", short="Online Clothing Brand", name="Online clothing brand", cat="E-commerce", color="c-purple",
+   goal="Profitable growth in online sales",
+   intro="How we would help a direct-to-consumer clothing brand grow sales while keeping ad costs under control and building a brand people remember.",
+   channels=["Paid social", "Content studio", "Email & SMS flows"],
+   situation=["Ad costs keep rising, and the same creatives have been running for months.",
+              "Many people add to cart and leave without buying.",
+              "Customers buy once and rarely come back for a second order."],
+   audiences=[("Trend followers", "Discover brands on TikTok and Instagram. They buy on impulse when the creative is right."),
+              ("Value seekers", "Love the style but wait for a reason to buy: a new drop, a bundle or a seasonal sale."),
+              ("Loyal fans", "Already bought and love the fit. They are the best source of repeat sales and reviews.")],
+   phases=[("Weeks 1–2", "Audit the numbers", "Check tracking, margins and which products and ads really make money."),
+           ("Weeks 3–4", "Creative sprint", "A batch of new videos: try-ons, styling tips, creator content and product close-ups."),
+           ("Weeks 5–8", "Structured testing", "Paid social campaigns that test hooks, formats and offers in a clear, repeatable way."),
+           ("Weeks 9–12", "Retention engine", "Welcome, abandoned cart, post-purchase and win-back flows by email and SMS.")],
+   tactics=[("Creative testing", "New ads every month, with clear tests to learn what actually sells."),
+            ("Creator content", "Real people wearing the clothes. More trustworthy than studio shots."),
+            ("Cart recovery", "A sequence of reminders for people who left items in their basket."),
+            ("Drops and bundles", "Limited releases and outfit bundles that give people a reason to buy now."),
+            ("Post-purchase flow", "Styling tips and fit questions that lead naturally to a second order."),
+            ("Margin-aware budgets", "Ad spend is judged on profit, not just revenue.")],
+   ad=("Sponsored · TikTok", "The trousers everyone keeps asking about", "Tailored fit, stretch fabric, 6 colours. Free returns for 30 days.", "Shop now"),
+   post=("Video idea", "“1 pair of trousers, 5 outfits”: a creator styles the bestseller for work, weekend and evening in 20 seconds."),
+   offer=("Abandoned cart email", "Still thinking it over? Your size is almost sold out"),
+   kpis=["Return on ad spend", "Cost per acquisition", "Conversion rate", "Repeat purchase rate", "Email & SMS revenue"],
+   services=["performance-marketing", "content-studio", "social-media"]),
+
+ A(slug="saas-startup", short="B2B Software Startup", name="B2B software startup", cat="Technology", color="c-dark",
+   goal="More demos with the right companies",
+   intro="How we would help an early-stage B2B software company build a predictable pipeline of demos, without wasting budget on the wrong audience.",
+   channels=["Positioning & website", "LinkedIn & Google Ads", "Content & SEO"],
+   situation=["The product is strong, but the website explains features, not the problem it solves.",
+              "Demo requests come in slowly, and many are from companies that are too small.",
+              "Content is published now and then, without a clear goal."],
+   audiences=[("The champion", "A manager who feels the problem every day and wants a better tool."),
+              ("The decision maker", "A head of department or founder who cares about cost, risk and results."),
+              ("The evaluator", "Someone in IT or operations who checks security, integrations and set-up time.")],
+   phases=[("Weeks 1–2", "Positioning", "Customer interviews and a clear message: who it is for, the problem and why it is better."),
+           ("Weeks 3–4", "Website & demo flow", "A rewritten homepage, use-case pages and a short demo form that qualifies leads."),
+           ("Weeks 5–8", "Targeted paid", "LinkedIn ads to the right job titles and company sizes, plus search ads for problem-aware terms."),
+           ("Weeks 9–12", "Content engine", "Comparison pages, practical guides and founder posts that build trust and search traffic.")],
+   tactics=[("Problem-first messaging", "Lead with the pain the customer feels, then show the product as the answer."),
+            ("Use-case pages", "A page for each type of team or industry, with relevant examples."),
+            ("Qualifying demo form", "Company size and role questions, so sales time goes to the right leads."),
+            ("Account targeting", "Ads shown only to companies that match the ideal customer profile."),
+            ("Comparison content", "Honest “us vs. them” pages for people already comparing tools."),
+            ("Founder-led LinkedIn", "Regular posts from the founder that share lessons and opinions.")],
+   ad=("Sponsored · LinkedIn", "Your team spends 6 hours a week on reports. It could be 6 minutes.", "Connect your tools once and get automatic, always-up-to-date reports. Set up in a day.", "Book a demo"),
+   post=("LinkedIn idea", "A founder post: “We interviewed 40 operations managers. Here are the 5 problems they all mentioned.”"),
+   offer=("Landing page headline", "Reporting that runs itself, so your team can get back to real work."),
+   kpis=["Qualified demos", "Cost per qualified demo", "Demo-to-customer rate", "Website conversion rate", "Organic sign-ups"],
+   services=["brand-strategy", "performance-marketing", "seo-growth"]),
+
+ A(slug="restaurant", short="Restaurant", name="Neighbourhood restaurant", cat="Local business", color="c-coral",
+   goal="Fuller tables, especially midweek",
+   intro="How we would help a neighbourhood restaurant fill tables on quiet nights, grow direct bookings and rely less on delivery apps.",
+   channels=["Instagram & TikTok", "Google Business Profile", "Email & events"],
+   situation=["Fridays and Saturdays are busy, but Monday to Wednesday is quiet.",
+              "Delivery apps take a large cut of every online order.",
+              "There is no guest list, so the restaurant can’t invite people back."],
+   audiences=[("Date nights", "Want atmosphere and something special. They discover places on Instagram."),
+              ("Groups & celebrations", "Birthdays and team dinners. They book ahead and need space and set menus."),
+              ("Locals", "Live nearby. They come back often if there is a reason, like a weekly special.")],
+   phases=[("Weeks 1–2", "Direct bookings", "Booking and ordering links front and centre on Google, Instagram and the website."),
+           ("Weeks 3–4", "Food that sells", "A content day to film the kitchen, signature dishes and the room at its best."),
+           ("Weeks 5–8", "Midweek reasons", "A recurring midweek event, like a set menu or chef’s table, promoted locally."),
+           ("Weeks 9–12", "Guest list", "Wi-fi and booking sign-ups feed a monthly email with events and offers.")],
+   tactics=[("Kitchen content", "Behind-the-scenes cooking videos that make people hungry."),
+            ("Midweek events", "Something special on quiet nights, instead of discounts every day."),
+            ("Direct ordering", "Your own ordering link, with a small reward for ordering direct."),
+            ("Group booking page", "An easy way to enquire for birthdays, parties and team dinners."),
+            ("Local food creators", "Inviting local food creators to try the menu and share honestly."),
+            ("Guest email list", "A list the restaurant owns, used for events and seasonal menus.")],
+   ad=("Sponsored · Instagram", "Tuesday is pasta night. £15 for two courses.", "Fresh pasta made every morning, a glass of house wine optional but encouraged. 10 minutes from you.", "Book a table"),
+   post=("Reel idea", "“How we make 300 ravioli before lunch”: a fast, satisfying kitchen video ending with the plated dish."),
+   offer=("Email subject line", "New autumn menu + a table for you this Wednesday?"),
+   kpis=["Direct bookings", "Midweek covers", "Direct online orders", "Guest list growth", "Google Maps actions"],
+   services=["social-media", "content-studio", "seo-growth"]),
+
+ A(slug="wedding-photographer", short="Wedding Photographer", name="Wedding photographer", cat="Creative services", color="c-light",
+   goal="More bookings from ideal couples",
+   intro="How we would help a wedding photographer attract couples who love their style, and book further ahead with less back-and-forth.",
+   channels=["Instagram & Pinterest", "SEO & venue pages", "Enquiry nurture"],
+   situation=["Enquiries come in, but many are looking for the cheapest option.",
+              "The portfolio is beautiful, but it doesn’t rank on Google for local venues.",
+              "Couples ask the same questions by email, and many go quiet after the first reply."],
+   audiences=[("Style-led couples", "Choose a photographer by the feel of their work, often on Instagram and Pinterest."),
+              ("Venue searchers", "Already booked a venue and search for photographers who know it."),
+              ("Planners & venues", "Recommend suppliers they trust to dozens of couples each year.")],
+   phases=[("Weeks 1–2", "Sharpen the brand", "Define the style and the ideal couple, then make the website say it clearly."),
+           ("Weeks 3–4", "Venue pages", "A blog post for each venue photographed, with real galleries and tips for that venue."),
+           ("Weeks 5–8", "Social & Pinterest", "A consistent posting plan and Pinterest boards that send traffic for years."),
+           ("Weeks 9–12", "Enquiry to booking", "A welcome guide with prices and FAQs, plus a friendly follow-up sequence.")],
+   tactics=[("Clear style statement", "Saying exactly what kind of wedding and couple you love, so the right people enquire."),
+            ("Venue SEO", "Ranking for “[venue] wedding photographer”, where couples already have a date and budget."),
+            ("Pinterest as search", "Pins keep sending visitors long after they are posted."),
+            ("Pricing guide", "A beautiful PDF with starting prices that filters out poor-fit enquiries."),
+            ("Follow-up sequence", "Helpful emails that keep the conversation going without being pushy."),
+            ("Supplier relationships", "Sharing images with venues and planners to earn recommendations.")],
+   ad=("Pinterest · Pin", "Relaxed, natural wedding photos at The Old Barn", "A full real wedding at one of the county’s most loved venues, plus 5 tips for photos there.", "See the gallery"),
+   post=("Post idea", "A carousel: “The 7 moments couples tell me they’re most glad I captured”, with one image for each moment."),
+   offer=("Email subject line", "Your wedding guide is here (and the 3 questions to ask any photographer)"),
+   kpis=["Enquiries from ideal couples", "Enquiry-to-booking rate", "Organic traffic to venue pages", "Pinterest clicks", "Referrals from venues"],
+   services=["brand-strategy", "seo-growth", "social-media"]),
+]
+APPROACH_IDX = {a["slug"]: a for a in APPROACHES}
+
+# footer: a column of example approaches (copied from the "Company" column so it gets the same accordion behaviour)
+def _approach_col(m):
+    col = m.group(0)
+    items = "".join(f'<li class="footer-link__col-li"><a data-underline-link="" href="/example-approaches/{a["slug"]}" class="p-m">{E(a["short"])}</a></li>' for a in APPROACHES)
+    items += '<li class="footer-link__col-li"><a data-underline-link="" href="/example-approaches" class="p-m">View all approaches →</a></li>'
+    col = col.replace('<h4 class="h-xs">Company</h4>', '<h4 class="h-xs">Example Approaches</h4>')
+    col = re.sub(r'<ul class="footer-link__col-ul">.*?</ul>', lambda _: f'<ul class="footer-link__col-ul">{items}</ul>', col, count=1, flags=re.S)
+    return col + m.group(0)
+home = re.sub(r'<div data-accordion-status="not-active" class="footer-link__col"><div data-hover="" data-accordion-toggle="" class="footer-link__col-top"><h4 class="h-xs">Company</h4>.*?</ul></div></div></div></div>',
+              _approach_col, home, count=1, flags=re.S)
+
 
 # free-audit banner: replace the Osmo dashboard screenshots with an Anvora audit-report mockup
 def audit_mock(cls, theme):
@@ -272,6 +601,34 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
  .anv-case__body dl{grid-template-columns:1fr}
  .anv-table th,.anv-table td{padding:.8em .6em;font-size:.85em}
 }
+.anv-arrow{font-size:1.6em;line-height:1;transition:transform .4s cubic-bezier(.65,.05,0,1)}.anv-tile:hover .anv-arrow{transform:translateX(.25em)}
+.anv-glance{display:grid;grid-template-columns:1.25fr 1fr;gap:var(--gap-s)}
+.anv-glance__goal{border-radius:1em;padding:var(--gap-l);min-height:24em;display:flex;flex-direction:column;justify-content:space-between}
+.anv-glance__info{background:var(--color-white);border-radius:1em;padding:var(--gap-l);display:flex;flex-direction:column;justify-content:space-between;gap:var(--gap-l)}
+.anv-glance__info dl{display:grid;grid-template-columns:9em 1fr;gap:1em 1.5em;margin:0}
+.anv-glance__info dt{font-family:Haffer Mono,Arial,sans-serif;font-size:.6875em;text-transform:uppercase;opacity:.5;padding-top:.4em}
+.anv-glance__info dd{margin:0;font-size:1.0625em}
+.anv-chip{border:1px solid currentColor;border-radius:2em;padding:.45em 1em;font-size:.9em}
+.anv-chal,.anv-kpis{list-style:none;margin:0;padding:0;border-top:1px solid var(--color-neutral-450)}
+.anv-chal li,.anv-kpis li{display:grid;grid-template-columns:3.5em 1fr;gap:1em;padding:1.4em 0;border-bottom:1px solid var(--color-neutral-450);align-items:baseline}
+.anv-chal li span,.anv-kpis li span{font-family:Haffer Mono,Arial,sans-serif;font-size:.75em;color:var(--color-purple)}
+.anv-kpis li{font-size:1.25em;letter-spacing:-.01em}
+.anv-phases .h-l{margin-top:-.2em}
+.anv-mock{border-radius:.75em;padding:var(--gap-l);min-height:22em;display:flex;flex-direction:column;gap:1.2em}.anv-mock.is--white{background:var(--color-white)}
+.anv-ad{border:1px solid var(--color-neutral-300);border-radius:.6em;padding:1.1em;display:flex;flex-direction:column;gap:.7em;margin-top:auto}
+.anv-ad__top{display:flex;align-items:center;gap:.7em;font-size:.85em;line-height:1.2}
+.anv-ad__top i{width:2.2em;height:2.2em;border-radius:50%;background:var(--color-purple);flex:none}
+.anv-ad__top small{opacity:.55;font-size:.85em}
+.anv-ad h4{font-size:1.2em;line-height:1.15;letter-spacing:-.02em;font-weight:500;margin:0}
+.anv-ad p{font-size:.92em;opacity:.7;margin:0}
+.anv-ad__cta{align-self:flex-start;background:var(--color-purple);color:#fff;border-radius:.4em;padding:.6em 1.1em;font-size:.85em}
+.anv-mock__play{width:3.2em;height:3.2em;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.9em;margin-top:auto}
+.anv-filters .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit}
+.anv-filters .anv-pill.is--on{background:var(--color-dark);color:var(--color-light);border-color:var(--color-dark)}
+@media (min-width:992px){.footer-link__col{width:auto;max-width:none;flex:none}.footer-link__col-li>a,.footer-link__col-li>button,.footer-link__col-top h4{white-space:nowrap}}
+.anv-fi{display:flex;flex-direction:column}.anv-fi>.anv-tile{flex:1}.anv-fi[hidden]{display:none}
+@media (max-width:991px){.anv-glance{grid-template-columns:1fr}}
+@media (max-width:767px){.anv-glance__goal{min-height:18em}.anv-glance__info dl{grid-template-columns:1fr;gap:.3em}.anv-glance__info dd{margin-bottom:.8em}.anv-kpis li{font-size:1.1em}}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -282,6 +639,7 @@ if(!f.checkValidity()){f.reportValidity();return}
 f.classList.add('is--sent');},true);
 function prefill(){var p=new URLSearchParams(location.search).get('plan');var s=document.querySelector('form.anv-form select[name=plan]');if(p&&s){s.value=p}}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;var v=b.getAttribute('data-copy');var done=function(){var l=b.querySelector('.anv-sw__chip .eyebrow');if(l){l.textContent='Copied '+v;setTimeout(function(){l.textContent='Copy'},1400)}b.classList.add('is--copied');setTimeout(function(){b.classList.remove('is--copied')},1400)};if(navigator.clipboard){navigator.clipboard.writeText(v).then(done,done)}else{done()}});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-filter]');if(!b)return;var f=b.getAttribute('data-filter');b.parentNode.querySelectorAll('[data-filter]').forEach(function(x){x.classList.toggle('is--on',x===b)});document.querySelectorAll('.anv-fi').forEach(function(t){t.hidden=!(f==='all'||t.getAttribute('data-cat')===f)});if(window.ScrollTrigger)ScrollTrigger.refresh()});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -575,7 +933,7 @@ approach_body = (hero("Our Approach", "How we work", "How we work", "Anvora is a
 write("/approach", page("approach", "Our Approach", "How Anvora works with clients.", approach_body))
 
 plans_body = (hero("Example Plans", "Not past results", "Example plans", "How we would approach common goals for different types of businesses. Anvora is new, so these are example plans, not case studies of past clients.",
-                   [CALL()])
+                   [CALL(), btn("See detailed industry examples", "/example-approaches", "neutral-200")])
               + section("".join(plan_block(c) for c in PLANS))
               + FOUNDING)
 write("/example-plans", page("example-plans", "Example Plans", "Example marketing plans by Anvora.", plans_body))
@@ -915,6 +1273,98 @@ brand_body = (hero("Brand", "Guidelines v1.0", "Brand guidelines",
               .replace("</div></section>", toc + "</div></section>", 1)
               + logo_sec + colour_sec + type_sec + buttons_sec + comp_sec + space_sec + voice_sec + img_sec)
 write("/brand", page("brand", "Brand Guidelines", "The Anvora brand guidelines: logo, colours, fonts, buttons and tone of voice.", brand_body, cta=False))
+
+# ------------------------------------------------------------------ example approach pages
+SVC_NAME = {s["slug"]: s["name"] for s in SERVICES}
+NOT_CLIENT = "Example approach · not a past client"
+
+def approach_tile(a, big=False):
+    return (f'<a href="/example-approaches/{a["slug"]}" class="anv-tile {a["color"]}"{" style=\"min-height:26em\"" if big else ""}>'
+            f'<div class="anv-row" style="justify-content:space-between"><span class="eyebrow">{E(a["cat"])}</span><span class="eyebrow">Example approach</span></div>'
+            f'<div><span class="eyebrow" style="opacity:.6">Goal</span><div class="h-m" style="margin:.3em 0 .6em">{E(a["goal"])}</div>'
+            f'<div class="anv-row" style="justify-content:space-between;align-items:flex-end"><h3 class="h-xs">{E(a["name"])}</h3><span class="anv-arrow">→</span></div></div></a>')
+
+def approach_page(a):
+    i = APPROACHES.index(a)
+    chips = "".join(f'<span class="anv-chip">{E(c)}</span>' for c in a["channels"])
+    glance = section(
+        f'<div class="anv-glance"><div class="anv-glance__goal {a["color"]}"><span class="eyebrow" style="opacity:.7">The goal</span>'
+        f'<div><div class="h-l">{E(a["goal"])}</div><div class="anv-row" style="margin-top:1.4em">{chips}</div></div></div>'
+        f'<div class="anv-glance__info"><dl>'
+        f'<dt>Business type</dt><dd>{E(a["name"])}</dd>'
+        f'<dt>Category</dt><dd>{E(a["cat"])}</dd>'
+        f'<dt>Main channels</dt><dd>{E(", ".join(a["channels"]))}</dd>'
+        f'<dt>First plan</dt><dd>90 days, reviewed every month</dd></dl>'
+        f'<p class="anv-note">This is an example of how we would approach this type of business. It is not a past client, and the numbers we track depend on your starting point.</p>'
+        f'</div></div>')
+    chal = "".join(f'<li><span>{n+1:02d}</span><p class="p-l">{E(t)}</p></li>' for n, t in enumerate(a["situation"]))
+    situation = section(f'<div class="anv-split"><div><span class="eyebrow anv-muted">The starting point</span>'
+                        f'<h2 class="h-l" style="margin-top:.4em">Typical challenges</h2>'
+                        f'<p class="p-l anv-muted" style="margin-top:1em;max-width:22em">What we often see with this type of business before marketing starts working.</p></div>'
+                        f'<ol class="anv-chal">{chal}</ol></div>')
+    aud = section(head("Audience", "Who we’d focus on") + cards(a["audiences"]), dark=True)
+    ph = "".join(f'<div class="anv-step"><span class="eyebrow anv-muted">{E(w)}</span><span class="h-l">{n+1:02d}</span>'
+                 f'<h3 class="h-s">{E(t)}</h3><p class="p-m">{E(d)}</p></div>' for n, (w, t, d) in enumerate(a["phases"]))
+    plan = section(head("The plan", "The first 90 days", "A step-by-step plan. We review results every month and adjust as we learn.")
+                   + f'<div class="anv-steps anv-phases">{ph}</div>')
+    tac = section(head("Tactics", "What we’d do") + cards(a["tactics"]), dark=False)
+    top, hl, txt, cta = a["ad"]
+    fmt, idea = a["post"]
+    olab, otxt = a["offer"]
+    samples = section(head("Sample ideas", "What it could look like", "Example copy written for this page, to show the direction we would take.")
+        + '<div class="anv-grid">'
+        + f'<div class="anv-mock is--white"><span class="eyebrow anv-muted">Sample ad</span><div class="anv-ad"><div class="anv-ad__top"><i></i><span>Your business<br><small>{E(top)}</small></span></div>'
+          f'<h4>{E(hl)}</h4><p>{E(txt)}</p><span class="anv-ad__cta">{E(cta)}</span></div></div>'
+        + f'<div class="anv-mock {a["color"] if a["color"] not in ("c-light",) else "c-purple"}"><span class="eyebrow" style="opacity:.7">{E(fmt)}</span>'
+          f'<div class="anv-mock__play">▶</div><p class="h-xs">{E(idea)}</p></div>'
+        + f'<div class="anv-mock c-dark"><span class="eyebrow" style="opacity:.7">{E(olab)}</span><p class="h-s" style="margin-top:auto">“{E(otxt)}”</p></div>'
+        + '</div>')
+    kp = "".join(f'<li><span>{n+1:02d}</span>{E(k)}</li>' for n, k in enumerate(a["kpis"]))
+    sv = "".join(f'<a class="anv-pill" href="/services/{s}" data-barba-p="">{E(SVC_NAME[s])} →</a>' for s in a["services"])
+    measure = section(f'<div class="anv-split"><div><span class="eyebrow anv-muted">Measurement</span>'
+                      f'<h2 class="h-l" style="margin-top:.4em">What we’d measure</h2>'
+                      f'<p class="p-l anv-muted" style="margin-top:1em;max-width:24em">Clear numbers, reported every month in plain language, including what did not work.</p>'
+                      f'<div style="margin-top:var(--gap-xxl)"><span class="eyebrow anv-muted">Services involved</span><div class="anv-row" style="margin-top:1em">{sv}</div></div></div>'
+                      f'<ol class="anv-kpis">{kp}</ol></div>')
+    more = [APPROACHES[(i + k) % len(APPROACHES)] for k in (1, 2, 3)]
+    related = section(head("More examples", "Other example approaches")
+                      + f'<div class="anv-grid">{"".join(approach_tile(m) for m in more)}</div>'
+                      + f'<div class="button-row" style="margin-top:var(--gap-xxl);justify-content:center">{btn("View all approaches", "/example-approaches", "neutral-200")}</div>')
+    body = (hero("Example approach", a["cat"], a["name"], a["intro"],
+                 [btn("Start a similar project", "/contact", "electric"), btn("Get a free audit", "/audit", "neutral-200")])
+            + glance + situation + aud + plan + tac + samples + measure + related)
+    return page("approach-" + a["slug"], f'Marketing for a {a["name"][0].lower() + a["name"][1:]}' if not a["name"].startswith("B2B") else "Marketing for a B2B software startup",
+                f'An example of how Anvora would approach marketing for a {a["name"].lower()}.', body)
+
+for a in APPROACHES:
+    write(f'/example-approaches/{a["slug"]}', approach_page(a))
+
+_cats = []
+for a in APPROACHES:
+    if a["cat"] not in _cats: _cats.append(a["cat"])
+filters = '<button class="anv-pill is--on" data-filter="all">All</button>' + "".join(
+    f'<button class="anv-pill" data-filter="{E(c)}">{E(c)}</button>' for c in _cats)
+grid = "".join(f'<div class="anv-fi" data-cat="{E(a["cat"])}">{approach_tile(a)}</div>' for a in APPROACHES)
+ex_body = (hero("Example Approaches", f'{len(APPROACHES)} industries', "How we’d approach your business",
+                "Step-by-step examples of how Anvora would plan marketing for different types of businesses, from a local coffee shop to a roofing company. These are examples, not past clients.",
+                [CALL(), btn("Get a free audit", "/audit", "neutral-200")])
+           + section(f'<div id="industries" style="scroll-margin-top:8em"></div>' + head("Industries", "Pick a business like yours")
+                     + f'<div class="anv-row anv-filters" style="margin-bottom:var(--gap-l)">{filters}</div>'
+                     + f'<div class="anv-grid">{grid}</div>')
+           + section(head("Inside every approach", "What each example covers") + cards([
+                 ("Typical challenges", "The problems we usually see with this type of business before marketing starts working."),
+                 ("Who to reach", "The main customer groups, and what each of them needs to hear."),
+                 ("A 90-day plan", "Four clear phases, from fixing the foundations to growing reach."),
+                 ("Tactics", "The specific actions we would take, and why they fit this business."),
+                 ("Sample ideas", "Example ads, posts and messages to show the direction we would take."),
+                 ("What we’d measure", "The numbers that show whether the plan is working.")]), dark=True)
+           + section(f'<div class="anv-split"><div><span class="eyebrow anv-muted">Don’t see yours?</span>'
+                     f'<h2 class="h-l" style="margin-top:.4em">Every business is different</h2></div><div>'
+                     f'<p class="p-l">These examples show how we think. Your plan will be built around your goals, your customers and your budget.</p>'
+                     f'<p class="p-l">Tell us about your business and we will send you a short, honest view of where we would start.</p>'
+                     f'<div class="button-row" style="margin-top:var(--gap-xxl)">{CALL()}{btn("Get a free audit", "/audit", "neutral-200")}</div></div></div>')
+           + FOUNDING)
+write("/example-approaches", page("example-approaches", "Example Approaches", "Examples of how Anvora would approach marketing for different types of businesses.", ex_body))
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")
