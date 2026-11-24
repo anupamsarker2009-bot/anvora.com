@@ -17,6 +17,7 @@ Website for **Anvora**, a full-service marketing company.
 | Insights | `/insights/` |
 | FAQs | `/faq/` |
 | Brand Guidelines | `/brand/` |
+| Social Media Posts (12 downloadable JPGs) | `/social-media-posts/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |
 
 ## Run it on your computer

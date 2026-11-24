@@ -83,6 +83,7 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
 
 # footer column headings
 home = re.sub(r'(>Support</a></li>)', r'\1<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
+home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li>', 1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
 
@@ -629,6 +630,18 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-fi{display:flex;flex-direction:column}.anv-fi>.anv-tile{flex:1}.anv-fi[hidden]{display:none}
 @media (max-width:991px){.anv-glance{grid-template-columns:1fr}}
 @media (max-width:767px){.anv-glance__goal{min-height:18em}.anv-glance__info dl{grid-template-columns:1fr;gap:.3em}.anv-glance__info dd{margin-bottom:.8em}.anv-kpis li{font-size:1.1em}}
+.anv-posts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-l) var(--gap-s)}
+.anv-post{display:flex;flex-direction:column;gap:1em}
+.anv-post__frame{border-radius:.75em;overflow:hidden;background:var(--color-neutral-300);aspect-ratio:4/5;box-shadow:0 .5em 2em rgba(0,0,0,.06)}
+.anv-post__frame canvas{display:block;width:100%;height:100%}
+.anv-post__meta{display:flex;flex-direction:column;gap:.8em}
+.anv-post__cap summary{cursor:pointer;font-size:.9em;opacity:.7}
+.anv-post__cap p{margin-top:.6em;font-size:.9em;line-height:1.45;opacity:.8;background:var(--color-white);border-radius:.5em;padding:1em}
+.anv-dl{font:inherit;font-size:.95em;border:0;cursor:pointer;background:var(--color-purple);color:#fff;border-radius:2em;padding:.65em 1.2em;transition:background .2s}
+.anv-dl:hover{background:var(--color-dark)}.anv-dl.is--big{padding:.9em 1.6em;font-size:1em}
+.anv-post .anv-pill{font:inherit;font-size:.95em;background:none;cursor:pointer;color:inherit}
+@media (max-width:991px){.anv-posts{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.anv-posts{grid-template-columns:1fr}}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -640,6 +653,8 @@ f.classList.add('is--sent');},true);
 function prefill(){var p=new URLSearchParams(location.search).get('plan');var s=document.querySelector('form.anv-form select[name=plan]');if(p&&s){s.value=p}}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;var v=b.getAttribute('data-copy');var done=function(){var l=b.querySelector('.anv-sw__chip .eyebrow');if(l){l.textContent='Copied '+v;setTimeout(function(){l.textContent='Copy'},1400)}b.classList.add('is--copied');setTimeout(function(){b.classList.remove('is--copied')},1400)};if(navigator.clipboard){navigator.clipboard.writeText(v).then(done,done)}else{done()}});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-filter]');if(!b)return;var f=b.getAttribute('data-filter');b.parentNode.querySelectorAll('[data-filter]').forEach(function(x){x.classList.toggle('is--on',x===b)});document.querySelectorAll('.anv-fi').forEach(function(t){t.hidden=!(f==='all'||t.getAttribute('data-cat')===f)});if(window.ScrollTrigger)ScrollTrigger.refresh()});
+function anvPostsLoad(){if(!document.querySelector('canvas[data-post]:not([data-drawn])'))return;if(window.anvPosts){anvPosts.render();return}if(document.getElementById('anv-posts-js'))return;var s=document.createElement('script');s.id='anv-posts-js';s.src='/js/anvora-posts.js';document.head.appendChild(s)}
+document.addEventListener('DOMContentLoaded',anvPostsLoad);new MutationObserver(function(){clearTimeout(window.__anvPT);window.__anvPT=setTimeout(anvPostsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -1365,6 +1380,60 @@ ex_body = (hero("Example Approaches", f'{len(APPROACHES)} industries', "How we�
                      f'<div class="button-row" style="margin-top:var(--gap-xxl)">{CALL()}{btn("Get a free audit", "/audit", "neutral-200")}</div></div></div>')
            + FOUNDING)
 write("/example-approaches", page("example-approaches", "Example Approaches", "Examples of how Anvora would approach marketing for different types of businesses.", ex_body))
+
+# ------------------------------------------------------------------ social media posts (drawn by /js/anvora-posts.js)
+_posts_js = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "posts.js"), encoding="utf-8").read().replace("__MARK__", _mark_path)
+open(os.path.join(SITE, "js", "anvora-posts.js"), "w", encoding="utf-8", newline="\n").write(_posts_js)
+
+TAGS = "#marketing #smallbusiness #digitalmarketing #anvora"
+SOCIAL_POSTS = [
+ ("intro", "Introduction", "Brand",
+  f"Hello, world. \U0001F44B\n\nAnvora is a new marketing company for ambitious small businesses: strategy, content and ads under one roof.\n\nWe’re just getting started, and we’d love to grow with you.\n\n{TAGS} #newbusiness"),
+ ("promise", "Our promise", "Brand",
+  f"We’re new, so we can’t show you years of results yet. What we can promise:\n\n01 Honest monthly reports, including what didn’t work\n02 Your accounts and data stay yours\n03 No guaranteed miracles, just steady work\n\n{TAGS}"),
+ ("founding", "Founding clients", "Offer",
+  f"We’re looking for a small number of founding clients to grow with. \U0001F680\n\nYou get a reduced founding rate and extra attention from day one. We ask for honest feedback in return.\n\nApply via the link in bio.\n\n{TAGS} #growth"),
+ ("tip-google", "Google profile tip", "Tip",
+  f"Is your Google profile quietly sending customers to your competitors?\n\n1. Your opening hours are out of date\n2. Your newest photo is over a year old\n3. Reviews sit there with no reply\n\nFix these three this week. Save this post for later. \U0001F4CC\n\n{TAGS} #localseo #googlebusinessprofile"),
+ ("principle", "Goals before tactics", "Brand",
+  f"Goals before tactics.\n\nBefore we talk about TikTok, ads or SEO, we ask one question: what does your business need to achieve in the next 90 days?\n\nThe channels come after that.\n\n{TAGS} #marketingstrategy"),
+ ("audit", "Free marketing audit", "Offer",
+  f"Not sure where your marketing is leaking? \U0001F50D\n\nGet a free Anvora marketing audit with clear scores for your website, ads, SEO, social and email, plus your top opportunities.\n\nNo strings attached. Link in bio.\n\n{TAGS} #marketingaudit"),
+ ("services", "What we do", "Services",
+  f"What we do, all under one roof:\n\n01 Brand Strategy\n02 Performance Marketing\n03 Social Media\n04 Content Studio\n05 SEO & Growth\n06 Web & Landing Pages\n\nWhich one does your business need most right now?\n\n{TAGS}"),
+ ("myth", "Myth vs fact", "Tip",
+  f"Myth: you need to post every single day.\nFact: consistency beats volume.\n\nThree thoughtful posts a week will do more for you than seven rushed ones. Pick a pace you can keep for a year.\n\n{TAGS} #socialmediatips #contentmarketing"),
+ ("process", "How we work", "Process",
+  f"How we work, in four steps:\n\n01 Discover: a free call and audit\n02 Plan: channels, budget, timeline and numbers\n03 Launch: brand, content and campaigns\n04 Improve: weekly tweaks, monthly reviews\n\n{TAGS}"),
+ ("five-second-test", "5-second homepage test", "Tip",
+  f"Try the 5-second homepage test. ⏱\n\nShow your homepage to someone for five seconds. Then ask:\n✔ What does this business do?\n✔ Who is it for?\n✔ What should I do next?\n\nIf they can’t answer all three, your homepage needs work.\n\n{TAGS} #webdesign #conversion"),
+ ("coffee-shop", "Example: coffee shop", "Example approach",
+  f"How would we market a local coffee shop? ☕\n\nWeeks 1–2: get found on Google Maps\nWeeks 3–4: film a month of short videos\nWeeks 5–8: launch a loyalty stamp card\nWeeks 9–12: small, local ads nearby\n\nAn example plan, not a past client. The full plan is on our website.\n\n{TAGS} #coffeeshop #localbusiness"),
+ ("question", "Your biggest headache", "Engagement",
+  f"Quick question for business owners: what’s your biggest marketing headache right now?\n\nA. Not enough leads\nB. No time for content\nC. Ads that don’t pay off\n\nTell us in the comments. We read every one. \U0001F447\n\n{TAGS}"),
+]
+
+def post_card(i, p):
+    pid, title, kind, cap = p
+    return (f'<article class="anv-post"><div class="anv-post__frame"><canvas data-post="{pid}" width="1080" height="1350" role="img" aria-label="{E(title)} post"></canvas></div>'
+            f'<div class="anv-post__meta"><div class="anv-row" style="justify-content:space-between"><span class="eyebrow anv-muted">Post {i+1:02d} · {E(kind)}</span>'
+            f'<span class="eyebrow anv-muted">1080 × 1350</span></div><h3 class="h-xs">{E(title)}</h3>'
+            f'<details class="anv-post__cap"><summary>Suggested caption</summary><p id="cap-{pid}">{E(cap).replace(chr(10), "<br>")}</p></details>'
+            f'<div class="anv-row"><button type="button" class="anv-dl" data-download="{pid}">Download JPG ↓</button>'
+            f'<button type="button" class="anv-pill" data-copy-caption="cap-{pid}">Copy caption</button></div></div></article>')
+
+posts_body = (hero("Social Media", f"{len(SOCIAL_POSTS)} posts", "Social Media Posts",
+                   "Ready-to-post graphics for Anvora’s Instagram and LinkedIn, in our brand colours and fonts. Each post is 1080 × 1350 px, the standard Instagram feed size, and comes with a suggested caption.",
+                   [])
+              + section('<div class="anv-row" style="justify-content:space-between;margin-bottom:var(--gap-l)">'
+                        '<p class="p-m anv-muted" style="max-width:34em">Click <strong>Download JPG</strong> under any post to save it, or download all of them at once. Your browser may ask you to allow multiple downloads.</p>'
+                        '<button type="button" class="anv-dl is--big" data-download="all">Download all 12 ↓</button></div>'
+                        f'<div class="anv-posts">{"".join(post_card(i, p) for i, p in enumerate(SOCIAL_POSTS))}</div>')
+              + section(head("Posting tips", "How to use these posts") + cards([
+                    ("Post 2–3 times a week", "A steady rhythm you can keep beats a burst of posts followed by silence."),
+                    ("Mix the types", "Alternate tips, offers and brand posts, so the feed is useful and not only promotional."),
+                    ("Reply to comments", "Answer every comment in the first hour. It builds trust and helps reach.")]), dark=True))
+write("/social-media-posts", page("social-media-posts", "Social Media Posts", "Ready-to-post Anvora social media graphics, downloadable as JPG.", posts_body, cta=False))
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")
