@@ -59,6 +59,10 @@ def rewire(s):
 
 home = rewire(home)
 
+# social links
+home = home.replace('<a href="#" target="_blank" aria-label="instagram"',
+                    '<a href="https://www.instagram.com/thumbnailanvora/" target="_blank" rel="noopener" data-barba-prevent="" aria-label="instagram"')
+
 # showreel: Anvora's own video (audio track removed) for the preview loop and the full-screen player
 REEL = "/videos/anvora-reel.mp4"
 home = re.sub(r'data-video-src="[^"]*Osmo-V12-Reel[^"]*"', f'data-video-src="{REEL}"', home)
