@@ -648,6 +648,14 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 @media (max-width:991px){.anv-stories{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:767px){.anv-stories{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:479px){.anv-stories{grid-template-columns:1fr;max-width:22em;margin:0 auto}}
+.anv-rm{text-decoration:none}
+.anv-rm__cover{position:absolute;inset:0;z-index:2;padding:.9em 1em;display:flex;flex-direction:column;justify-content:space-between;border-radius:inherit}
+.anv-rm__top{display:flex;justify-content:space-between;gap:1em;font-family:Haffer Mono,Arial,sans-serif;font-size:.5em;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
+.anv-rm__label{font-family:Haffer Mono,Arial,sans-serif;font-size:.5em;text-transform:uppercase;opacity:.6}
+.anv-rm__goal{font-family:Haffer XH,Arial,sans-serif;font-size:1.3em;line-height:1;letter-spacing:-.04em;margin-top:.15em}
+.anv-rm:hover .anv-rm__cover{filter:brightness(1.06)}
+@media (max-width:767px){.anv-rm__top span+span{display:none}}
+[data-radial-marquee] .radial-marquee__list .radial-marquee__item:nth-child(n+19){display:none}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -1496,5 +1504,24 @@ def remove_div(s, opener):
             return s[:i] + s[i + m.end():]
     return s
 home = remove_div(home, '<div class="trustedby-wrap">')
+
+# hero ring of cards: show the example approach pages instead of the Osmo videos
+def _rm_card(a):
+    return (f'<div role="listitem" class="radial-marquee__item w-dyn-item"><div class="radial-marquee__card">'
+            f'<a href="/example-approaches/{a["slug"]}" class="radial-marquee__card-inner anv-rm">'
+            f'<div class="radial-marquee__card-visual"><div class="resource-visual__before"></div><div class="anv-rm__cover {a["color"]}">'
+            f'<div class="anv-rm__top"><span>{E(a["cat"])}</span><span>Example approach</span></div>'
+            f'<div><span class="anv-rm__label">Goal</span><div class="anv-rm__goal">{E(a["goal"])}</div></div></div></div>'
+            f'<div class="radial-marquee__card-info"><p class="radial-marquee__card-p">{E(a["name"])}</p></div></a></div></div>')
+_op = 'data-radial-marquee-rotate="" role="list" class="radial-marquee__list w-dyn-items">'
+_i = home.find(_op)
+if _i >= 0:
+    _start = _i + len(_op)
+    _depth = 1
+    for _m in re.finditer(r"<(/?)div(?:\s[^>]*)?>", home[_start:]):
+        _depth += -1 if _m.group(1) else 1
+        if _depth == 0:
+            home = home[:_start] + "".join(_rm_card(a) for a in APPROACHES) + home[_start + _m.start():]
+            break
 open(os.path.join(SITE, "index.html"), "w", encoding="utf-8", newline="\n").write(finish(home))
 print("updated /index.html")

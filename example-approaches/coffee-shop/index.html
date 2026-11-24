@@ -381,6 +381,14 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 @media (max-width:991px){.anv-stories{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:767px){.anv-stories{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:479px){.anv-stories{grid-template-columns:1fr;max-width:22em;margin:0 auto}}
+.anv-rm{text-decoration:none}
+.anv-rm__cover{position:absolute;inset:0;z-index:2;padding:.9em 1em;display:flex;flex-direction:column;justify-content:space-between;border-radius:inherit}
+.anv-rm__top{display:flex;justify-content:space-between;gap:1em;font-family:Haffer Mono,Arial,sans-serif;font-size:.5em;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
+.anv-rm__label{font-family:Haffer Mono,Arial,sans-serif;font-size:.5em;text-transform:uppercase;opacity:.6}
+.anv-rm__goal{font-family:Haffer XH,Arial,sans-serif;font-size:1.3em;line-height:1;letter-spacing:-.04em;margin-top:.15em}
+.anv-rm:hover .anv-rm__cover{filter:brightness(1.06)}
+@media (max-width:767px){.anv-rm__top span+span{display:none}}
+[data-radial-marquee] .radial-marquee__list .radial-marquee__item:nth-child(n+19){display:none}
 </style></head><body data-barba="wrapper" class="body"><div class="global"><div class="embed-css w-embed"><link href="/css/45154.css" rel="stylesheet" type="text/css"> <!-- variables.css -->
 <link href="/css/45446.css" rel="stylesheet" type="text/css"> <!-- marketing.css -->
 <link href="/css/45511.css" rel="stylesheet" type="text/css"> <!-- components.css -->
