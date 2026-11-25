@@ -83,7 +83,7 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
 
 # footer column headings
 home = re.sub(r'(>Support</a></li>)', r'\1<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
-home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-stories" class="p-m">Instagram Stories</a></li>', 1)
+home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-stories" class="p-m">Instagram Stories</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-scripts" class="p-m">Scripts for Instagram</a></li>', 1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
 
@@ -656,6 +656,28 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-rm:hover .anv-rm__cover{filter:brightness(1.06)}
 @media (max-width:767px){.anv-rm__top span+span{display:none}}
 [data-radial-marquee] .radial-marquee__list .radial-marquee__item:nth-child(n+19){display:none}
+.anv-scripts{display:flex;flex-direction:column;gap:var(--gap-s)}
+.anv-script{background:var(--color-white);border-radius:1em;padding:var(--gap-l);display:flex;flex-direction:column;gap:1.2em}
+.anv-script .h-s{max-width:22em}
+.anv-script__hook{border-left:3px solid var(--color-purple);padding:.2em 0 .2em 1.2em;display:flex;flex-direction:column;gap:.5em}
+.anv-script__hook p{font-size:1.35em;line-height:1.3;letter-spacing:-.01em;margin:0;max-width:34em}
+.anv-script__body>summary{cursor:pointer;display:inline-flex;align-items:center;gap:.5em;font-weight:500;list-style:none;border:1px solid var(--color-neutral-450);border-radius:2em;padding:.5em 1.1em}
+.anv-script__body>summary::-webkit-details-marker{display:none}
+.anv-script__body>summary:after{content:'+';font-size:1.2em;line-height:1;transition:transform .3s}
+.anv-script__body[open]>summary:after{transform:rotate(45deg)}
+.anv-script__info{display:grid;grid-template-columns:6em 1fr;gap:.5em 1.5em;margin:1.5em 0 0}
+.anv-script__info dt,.anv-beats b,.anv-beats__t{font-family:Haffer Mono,Arial,sans-serif;font-size:.6875em;text-transform:uppercase;letter-spacing:.03em}
+.anv-script__info dt{opacity:.5;padding-top:.35em}.anv-script__info dd{margin:0;opacity:.8}
+.anv-beats{list-style:none;margin:1.5em 0 0;padding:0;border-top:1px solid var(--color-neutral-450)}
+.anv-beats li{display:grid;grid-template-columns:7em 1fr;gap:1.5em;padding:1.2em 0;border-bottom:1px solid var(--color-neutral-450)}
+.anv-beats__t{color:var(--color-purple);padding-top:.45em}
+.anv-beats__vo{font-size:1.15em;line-height:1.4;margin:0 0 .7em}
+.anv-beats__meta{display:grid;grid-template-columns:1fr 1fr;gap:1.5em;font-size:.92em;opacity:.75}
+.anv-beats__meta span{display:flex;flex-direction:column;gap:.3em}.anv-beats b{font-weight:400;opacity:.6}
+.anv-script__cap{margin-top:1.5em;background:var(--color-light);border-radius:.6em;padding:1.2em;display:flex;flex-direction:column;gap:.5em}
+.anv-script__cap p{margin:0;font-size:.95em;line-height:1.5;opacity:.85}
+.anv-script .anv-pill{font:inherit;font-size:.95em;background:none;cursor:pointer;color:inherit}
+@media (max-width:767px){.anv-beats li{grid-template-columns:1fr;gap:.4em}.anv-beats__meta{grid-template-columns:1fr;gap:.8em}.anv-script__info{grid-template-columns:1fr;gap:.2em}.anv-script__info dd{margin-bottom:.6em}.anv-script__hook p{font-size:1.15em}}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -671,6 +693,7 @@ function anvPostsLoad(){if(!document.querySelector('canvas[data-post]:not([data-
 document.addEventListener('DOMContentLoaded',anvPostsLoad);new MutationObserver(function(){clearTimeout(window.__anvPT);window.__anvPT=setTimeout(anvPostsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 function anvStoriesLoad(){if(!document.querySelector('canvas[data-story]:not([data-drawn])'))return;if(window.anvStories){anvStories.render();return}if(document.getElementById('anv-stories-js'))return;var s=document.createElement('script');s.id='anv-stories-js';s.src='/js/anvora-stories.js';document.head.appendChild(s)}
 document.addEventListener('DOMContentLoaded',anvStoriesLoad);new MutationObserver(function(){clearTimeout(window.__anvST);window.__anvST=setTimeout(anvStoriesLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
+(function(){if(document.getElementById('anv-scripts-js'))return;var s=document.createElement('script');s.id='anv-scripts-js';s.src='/js/anvora-scripts.js';s.defer=true;document.head.appendChild(s)})();
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -1490,6 +1513,191 @@ stories_body = (hero("Instagram", f"{len(IG_STORIES)} stories", "Instagram Stori
                       ("Post a few in a row", "Three to five stories a day, a few days a week, keeps you at the front of your followers’ story bar."),
                       ("Save the best to highlights", "Stories vanish after 24 hours. Highlights like ‘Services’, ‘Tips’ and ‘Work with us’ keep them on your profile.")]), dark=True))
 write("/instagram-stories", page("instagram-stories", "Instagram Stories", "Ready-to-post Anvora Instagram Stories, downloadable as JPG.", stories_body, cta=False))
+
+# ------------------------------------------------------------------ instagram scripts (faceless, voice-over reels under 60 seconds)
+open(os.path.join(SITE, "js", "anvora-scripts.js"), "w", encoding="utf-8", newline="\n").write(
+    open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts.js"), encoding="utf-8").read())
+
+# each beat: (voice-over, on-screen text, visuals). Timings are worked out from the word count at a relaxed 150 words a minute.
+IG_SCRIPTS = [
+ dict(id="google-profile", title="3 signs your Google profile is costing you customers", kind="Tip", fmt="Screen recordings of Google Maps on a phone, plus stock shots of shop fronts.",
+      music="Light, upbeat lo-fi, kept low under the voice.",
+      beats=[
+       ("Your Google profile might be sending customers straight to your competitors.", "Is your Google profile losing you customers?", "Screen recording: scrolling Google Maps results on a phone."),
+       ("Sign one: your opening hours are wrong. Someone turns up, finds the door locked, and never comes back.", "1. Wrong opening hours", "A ‘Closed’ sign on a shop door."),
+       ("Sign two: your newest photo is over a year old. People judge a place by its photos before they read a single review.", "2. Old photos", "Scroll through dull, dated photos, then cut to bright new ones."),
+       ("Sign three: reviews with no reply. Every unanswered review tells the next customer that nobody is listening.", "3. No review replies", "Zoom in on a review with no owner response."),
+       ("The good news? You can fix all three this week, for free, in under an hour.", "Fix all 3 this week. Free.", "A checklist ticking itself off."),
+       ("Save this so you don’t forget, and follow Anvora for more simple marketing fixes.", "Save + follow @thumbnailanvora", "Anvora end card with the logo.")],
+      caption="Your Google profile is often the first thing a customer sees. Fix these three this week. 📌 Save for later.\n\n#localseo #googlebusinessprofile #smallbusiness #marketingtips #anvora"),
+ dict(id="post-every-day", title="Why posting every day isn’t working", kind="Myth vs fact", fmt="Kinetic text over quick B-roll of a desk, a calendar and a phone.",
+      music="Punchy beat with a short pause on the ‘myth’ line.",
+      beats=[
+       ("Posting every single day might be the reason your account isn’t growing.", "Posting daily = growth?", "Fast scroll through a calendar packed with crossed-off days."),
+       ("Here’s what usually happens. You post daily for two weeks, the quality drops, you burn out, and then you disappear for a month.", "Post daily → burn out → disappear", "Quick cuts: phone, cold coffee, messy desk, phone turned face down."),
+       ("The algorithm doesn’t reward volume. It rewards posts people actually watch, save and share.", "Watched. Saved. Shared.", "Play, bookmark and share icons pop in one by one."),
+       ("So pick a pace you can keep for a year. For most small businesses, that’s three good posts a week.", "3 good posts a week", "A calendar with three days circled."),
+       ("One that teaches, one that shows your work, and one that tells people how to buy.", "Teach · Show · Sell", "Three cards slide in side by side."),
+       ("Consistency beats volume. Every time. Follow Anvora for marketing that actually fits your week.", "Consistency > volume", "Anvora end card.")],
+      caption="Myth: you need to post every day. Fact: consistency beats volume. What pace could you keep for a whole year?\n\n#socialmediatips #contentmarketing #smallbusiness #instagramtips #anvora"),
+ dict(id="five-second-test", title="The 5-second homepage test", kind="Website tip", fmt="Screen recording of a sample homepage, a stopwatch graphic and simple wireframes.",
+      music="Ticking clock sound for the first five seconds, then a clean beat.",
+      beats=[
+       ("Here’s a test your website can fail in five seconds.", "The 5-second test", "A stopwatch starts."),
+       ("Show your homepage to a friend for five seconds. Then close it, and ask them three questions.", "Show it for 5 seconds", "Screen recording of a homepage that blurs out after five seconds."),
+       ("One: what does this business do? Two: who is it for? Three: what should I do next?", "1. What do they do?  2. Who is it for?  3. What next?", "Each question types itself onto the screen."),
+       ("If they can’t answer all three, your visitors can’t either. And they won’t stay to figure it out.", "Confused visitors leave", "A cursor drifts to the browser’s back button."),
+       ("Fix it with one clear headline, one line on who you help, and one obvious button.", "Headline · Who · Button", "Before-and-after wireframe of a homepage."),
+       ("Try it today, and tell us in the comments how you scored.", "Comment your score", "Anvora end card.")],
+      caption="Can a stranger tell what you do in five seconds? Try the test and tell us your score below. 👇\n\n#webdesign #conversion #smallbusiness #websitetips #anvora"),
+ dict(id="before-ads", title="Answer these 3 questions before you spend on ads", kind="Ads tip", fmt="Kinetic text, B-roll of a card payment and a blurred ads dashboard.",
+      music="Steady, serious beat. Drop the music for a beat after the hook.",
+      beats=[
+       ("Before you spend any money on ads, answer these three questions.", "Before you run ads…", "A finger hovering over a ‘Publish’ button."),
+       ("One: what exactly do you want people to do? Call, book or buy? Pick one. Ads that ask for everything get nothing.", "1. One clear action", "Three buttons appear, two fade away."),
+       ("Two: what is a new customer worth to you? Once you know that, you know what you can afford to pay to win one.", "2. What’s a customer worth?", "Simple sum on screen: customer value vs cost to win one."),
+       ("Three: where does the ad send people? If it’s your homepage, you’re probably wasting clicks. Send them to a page built for that one offer.", "3. Where do clicks land?", "Arrow from an ad to a focused landing page."),
+       ("Answer those three first, and your ads have a real chance. Skip them, and you’re just paying to be seen.", "Answer first. Spend second.", "Blurred ads dashboard comes into focus."),
+       ("Follow Anvora for marketing advice that respects your budget.", "Follow @thumbnailanvora", "Anvora end card.")],
+      caption="Three questions that save you from wasted ad spend. Which one have you skipped before?\n\n#facebookads #instagramads #paidads #smallbusiness #anvora"),
+ dict(id="coffee-shop", title="How we’d market a local coffee shop in 90 days", kind="Example approach", fmt="Café B-roll: latte art, the espresso machine, a stamp card, a map pin.",
+      music="Warm acoustic or café jazz.",
+      beats=[
+       ("If we were marketing a local coffee shop, here’s exactly what we’d do in ninety days.", "Marketing a coffee shop: 90-day plan", "Slow-motion latte art."),
+       ("Weeks one and two: get found. Fix the Google profile, add fresh photos, and check the opening hours.", "Weeks 1–2: Get found on Google Maps", "Map pin dropping on a street."),
+       ("Weeks three and four: film a month of short videos in one afternoon. The barista, the pour, the first coffee of the morning.", "Weeks 3–4: Batch a month of videos", "Quick cuts of the espresso machine and the pour."),
+       ("Weeks five to eight: launch a loyalty stamp card, because a regular is worth far more than a one-off visit.", "Weeks 5–8: Loyalty stamp card", "A stamp card getting stamped."),
+       ("Weeks nine to twelve: small local ads, shown only to people a short walk from the shop.", "Weeks 9–12: Hyper-local ads", "Circle radius drawn around the café on a map."),
+       ("This is an example plan, not a past client. Run a café? Send this to yourself and start with week one.", "Example plan · not a past client", "Anvora end card.")],
+      caption="Our 90-day plan for a local coffee shop. ☕ An example approach, not a past client. Full plan on our website, link in bio.\n\n#coffeeshop #localbusiness #cafemarketing #smallbusiness #anvora"),
+ dict(id="were-new", title="We’re new. Here’s why that’s good for you", kind="Brand", fmt="Calm B-roll: a fresh notebook, a clean desk, a laptop opening. Kinetic text for each promise.",
+      music="Soft, hopeful piano or ambient.",
+      beats=[
+       ("We’re a brand new marketing agency. And honestly, that might be the best reason to work with us.", "We’re new. Here’s why that’s good.", "A blank notebook being opened."),
+       ("We can’t show you years of case studies yet. So we won’t pretend to.", "No fake case studies", "Empty frames on a wall."),
+       ("What we can promise: honest monthly reports, including what didn’t work. And your ad accounts and data stay yours. Always.", "Honest reports · Your accounts stay yours", "A simple report being flicked through."),
+       ("Because we’re taking on only a few founding clients, you get our full attention, and a founding rate.", "Few clients. Full attention.", "A calendar with only a few names on it."),
+       ("If you’d like to grow with us from day one, the link to apply is in our bio.", "Apply: link in bio", "Anvora end card.")],
+      caption="We’re new, and we’re not going to pretend otherwise. We are welcoming a small number of founding clients. Link in bio. 🚀\n\n#newbusiness #marketingagency #smallbusiness #anvora"),
+ dict(id="free-audit", title="What our free marketing audit actually checks", kind="Offer", fmt="Screen recording of a sample audit report, with each section highlighted in turn.",
+      music="Clean, modern beat.",
+      beats=[
+       ("Not sure where your marketing is leaking? Here’s what our free audit checks.", "What a free marketing audit checks", "A sample report scrolls into view."),
+       ("Your website: is it fast, clear and easy to act on from a phone?", "Website", "Phone loading a website."),
+       ("Your search presence: can people actually find you on Google and on Maps?", "Search & Maps", "Search results page, highlight on a listing."),
+       ("Your social: are you posting what customers care about, or just posting?", "Social", "Scroll through an Instagram grid."),
+       ("Your ads and email: if you run them, are they tracked, and are they paying off?", "Ads & email", "Blurred ads and inbox screens."),
+       ("You get a clear score for each, plus your top opportunities, in plain English. It’s free, with no obligation. Link in bio.", "Scores + top fixes · Free", "Score ring fills up, then Anvora end card.")],
+      caption="A free, no-strings marketing audit: website, search, social, ads and email, scored in plain English. Link in bio. 🔍\n\n#marketingaudit #smallbusiness #digitalmarketing #anvora"),
+ dict(id="stop-boosting", title="Stop pressing ‘Boost post’", kind="Ads tip", fmt="Screen recording of the Boost button (blur any personal details), then simple graphics.",
+      music="Playful beat with a ‘record scratch’ on the hook.",
+      beats=[
+       ("That blue ‘Boost post’ button might be the most expensive button on Instagram.", "Stop pressing ‘Boost’", "Finger hovering over the Boost button, then a big red ✕."),
+       ("Boosting is quick, but it gives you very little control. Basic targeting, few goals, and it often chases likes instead of customers.", "Likes ≠ customers", "Heart icons piling up while a till stays empty."),
+       ("Running ads through Ads Manager lets you pick what you actually want: messages, bookings or sales.", "Pick your real goal", "Three goal options, one gets selected."),
+       ("You can test different versions, reach people who already visited your website, and see what each sale really cost.", "Test · Retarget · Track", "Two ad versions side by side, one wins."),
+       ("Boosting isn’t evil. It’s just rarely the best use of your money. Save this before your next boost.", "Not evil. Just rarely best.", "Anvora end card.")],
+      caption="Boosting is easy. That’s the problem. Here’s what to do instead. 💡 Save this for your next campaign.\n\n#instagramads #metaads #paidsocial #smallbusiness #anvora"),
+ dict(id="bad-review", title="How to reply to a bad review", kind="Tip", fmt="Phone screen showing a mock review (use a made-up name) and a reply being typed.",
+      music="Calm, steady beat.",
+      beats=[
+       ("Got a bad review? Don’t delete it, and don’t argue. Use this three-part reply.", "How to reply to a bad review", "A one-star review appears on a phone."),
+       ("Part one: thank them, and say sorry about their experience. Keep it short and calm.", "1. Thank + apologise", "Reply being typed: ‘Thanks for telling us…’"),
+       ("Part two: show you’ve taken it seriously. Say what you’re changing, without making excuses.", "2. Say what you’ll fix", "Reply continues on screen."),
+       ("Part three: take it offline. Give them a name and a direct way to reach you.", "3. Take it offline", "Reply ends with a name and contact line."),
+       ("Remember, you’re not just replying to one person. You’re replying to everyone who reads it next. Save this for the day you need it.", "Your reply is for future customers", "Pull back to show several people scrolling reviews, then Anvora end card.")],
+      caption="A bad review handled well can win you more trust than a good one. Save this three-part reply. 📌\n\n#reviews #customerservice #reputation #smallbusiness #anvora"),
+ dict(id="hooks", title="3 hooks that stop the scroll", kind="Content tip", fmt="Fast kinetic typography. Each hook appears in big text over a phone mock-up.",
+      music="Fast, energetic beat with a hit on each hook.",
+      beats=[
+       ("You’ve got about three seconds before someone scrolls past your video. Here are three hooks that buy you more time.", "3 hooks that stop the scroll", "Thumb scrolling fast, then stopping."),
+       ("Hook one: call out the viewer. ‘If you run a salon, stop scrolling.’", "1. Call out the viewer", "The example hook slams onto the screen."),
+       ("Hook two: name the mistake. ‘You’re losing customers on your website, and here’s where.’", "2. Name the mistake", "Example hook with a red underline."),
+       ("Hook three: promise a quick win. ‘One change that gets you more reviews this week.’", "3. Promise a quick win", "Example hook with a green tick."),
+       ("Then deliver fast. No long intro, no ‘hey guys, welcome back’. Steal these, and follow Anvora for more.", "Deliver fast", "Anvora end card.")],
+      caption="Your first three seconds decide everything. Which hook will you try first? 👇\n\n#contentcreation #reels #hooks #instagramtips #anvora"),
+ dict(id="win-back-email", title="The one email that brings customers back", kind="Email tip", fmt="Screen recording of an email being written in a simple editor.",
+      music="Friendly, light beat.",
+      beats=[
+       ("One simple email can bring old customers back. Here’s how to write it.", "The win-back email", "An inbox with one new email arriving."),
+       ("Send it to people who bought from you, but haven’t been back in a while.", "Who: past customers", "A customer list filtered to ‘last visit over 3 months ago’."),
+       ("Subject line: ‘We’ve missed you.’ Simple and personal.", "Subject: We’ve missed you", "Subject line being typed."),
+       ("Inside, one short line about what’s new, and one reason to come back, like a small thank-you offer with an end date.", "What’s new + 1 reason + end date", "Email body filling in, a date highlighted."),
+       ("Then one button. One action. Nothing else to click.", "One button", "A single big button appears."),
+       ("Winning back an old customer is often easier than finding a new one. Save this, and send yours this week.", "Send yours this week", "Anvora end card.")],
+      caption="The easiest new customer is often an old one. Save this win-back email template. ✉️\n\n#emailmarketing #customerretention #smallbusiness #anvora"),
+ dict(id="how-we-work", title="What happens when you hire Anvora", kind="Process", fmt="Clean motion graphics: four numbered steps on Anvora brand colours.",
+      music="Confident, modern beat.",
+      beats=[
+       ("Ever wondered what actually happens when you hire a marketing agency? Here’s how we work, in four steps.", "How Anvora works", "Anvora logo, then ‘4 steps’."),
+       ("Step one: discover. A free call and audit, so we understand your business and your goals.", "01 Discover", "Purple card with ‘01’."),
+       ("Step two: plan. We agree on the channels, the budget, the timeline and the numbers we’ll track.", "02 Plan", "Green card with ‘02’."),
+       ("Step three: launch. We build the content, the campaigns and the pages.", "03 Launch", "Coral card with ‘03’."),
+       ("Step four: improve. Small tweaks every week, and a clear, honest review every month.", "04 Improve", "Dark card with ‘04’."),
+       ("No jargon, no guesswork. Want to start with step one? Book a free call. Link in bio.", "Book a free call: link in bio", "Anvora end card.")],
+      caption="No mystery, no jargon. This is exactly how we work, from the first call to the monthly review.\n\n#marketingagency #howwework #smallbusiness #anvora"),
+]
+
+WPS = 2.5  # words per second (150 wpm, a relaxed voice-over pace)
+def _words(t):
+    return len(re.findall(r"[\w’']+", t))
+def _timeline(s):
+    t, out = 0, []
+    for vo, ons, vis in s["beats"]:
+        d = max(3, -(-_words(vo) // WPS))  # round up
+        d = int(d)
+        out.append((t, t + d, vo, ons, vis)); t += d
+    return out, t
+def _ts(n):
+    return f"{n // 60}:{n % 60:02d}"
+
+def script_txt(i, s):
+    tl, total = _timeline(s)
+    words = sum(_words(b[0]) for b in s["beats"])
+    lines = [f"ANVORA · INSTAGRAM SCRIPT {i+1:02d}", s["title"], "",
+             f"Type: {s['kind']}   Length: about {total} seconds ({words} words)",
+             f"Format: {s['fmt']}", f"Music: {s['music']}", ""]
+    for k, (a, b, vo, ons, vis) in enumerate(tl):
+        lines += [f"[{_ts(a)}–{_ts(b)}]{'  HOOK' if k == 0 else ''}", f"VOICE-OVER: {vo}", f"ON SCREEN: {ons}", f"VISUALS: {vis}", ""]
+    lines += ["CAPTION", s["caption"]]
+    return "\n".join(lines)
+
+def script_card(i, s):
+    tl, total = _timeline(s)
+    assert total < 60, (s["id"], total)
+    words = sum(_words(b[0]) for b in s["beats"])
+    beats = "".join(
+        f'<li><span class="anv-beats__t">{_ts(a)}–{_ts(b)}</span><div><p class="anv-beats__vo">{E(vo)}</p>'
+        f'<div class="anv-beats__meta"><span><b>On screen</b>{E(ons)}</span><span><b>Visuals</b>{E(vis)}</span></div></div></li>'
+        for a, b, vo, ons, vis in tl)
+    vo_only = "\n\n".join(b[0] for b in s["beats"])
+    return (f'<article class="anv-script" id="script-{s["id"]}">'
+            f'<div class="anv-row" style="justify-content:space-between"><span class="eyebrow anv-muted">Script {i+1:02d} · {E(s["kind"])}</span>'
+            f'<span class="eyebrow anv-muted">About {total} sec · {words} words</span></div>'
+            f'<h3 class="h-s">{E(s["title"])}</h3>'
+            f'<div class="anv-script__hook"><span class="eyebrow">The hook</span><p>“{E(s["beats"][0][0])}”</p></div>'
+            f'<details class="anv-script__body"{" open" if i == 0 else ""}><summary>Full script</summary>'
+            f'<dl class="anv-script__info"><dt>Format</dt><dd>{E(s["fmt"])}</dd><dt>Music</dt><dd>{E(s["music"])}</dd></dl>'
+            f'<ol class="anv-beats">{beats}</ol>'
+            f'<div class="anv-script__cap"><span class="eyebrow">Caption</span><p>{E(s["caption"]).replace(chr(10), "<br>")}</p></div></details>'
+            f'<div class="anv-row"><button type="button" class="anv-dl" data-script-dl="{s["id"]}">Download script (.txt) ↓</button>'
+            f'<button type="button" class="anv-pill" data-script-copy="vo-{s["id"]}">Copy voice-over</button></div>'
+            f'<pre hidden id="vo-{s["id"]}">{E(vo_only)}</pre>'
+            f'<pre hidden data-script-txt id="txt-{s["id"]}" data-file="anvora-script-{i+1:02d}-{s["id"]}.txt">{E(script_txt(i, s))}</pre>'
+            f'</article>')
+
+scripts_body = (hero("Instagram", f"{len(IG_SCRIPTS)} scripts", "Scripts for Instagram",
+                     "Ready-to-record scripts for faceless Instagram Reels: just your voice, on-screen text and simple visuals. Every script runs under 60 seconds and comes with timings, on-screen text, visual ideas and a caption.",
+                     [])
+                + section('<div class="anv-row" style="justify-content:space-between;margin-bottom:var(--gap-l)">'
+                          '<p class="p-m anv-muted" style="max-width:36em">Open <strong>Full script</strong> to see every line with its timing, what goes on screen and what to show. <strong>Copy voice-over</strong> gives you just the words to read, for a teleprompter app or your notes.</p>'
+                          f'<button type="button" class="anv-dl is--big" data-script-dl="all">Download all {len(IG_SCRIPTS)} scripts ↓</button></div>'
+                          f'<div class="anv-scripts">{"".join(script_card(i, s) for i, s in enumerate(IG_SCRIPTS))}</div>')
+                + section(head("Production tips", "Making faceless Reels that feel personal") + cards([
+                      ("Record the voice first", "Use a quiet room with soft furnishings and hold your phone a hand’s width from your mouth. Read each line twice and keep the better take."),
+                      ("Edit to the voice", "Cut to a new shot every two to three seconds. Keep captions on, because many people watch with the sound off."),
+                      ("Keep visuals simple", "Your own phone footage, screen recordings and free stock clips are enough. Add the on-screen text from the script in Anvora’s fonts and colours.")]), dark=True))
+write("/instagram-scripts", page("instagram-scripts", "Scripts for Instagram", "Ready-to-record faceless Instagram Reel scripts from Anvora, all under 60 seconds.", scripts_body, cta=False))
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")
