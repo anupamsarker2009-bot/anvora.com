@@ -32,6 +32,7 @@
     gate.parentNode.removeChild(gate);
     scripts.forEach(function (old) {  // scripts added through HTML don't run, so re-create them
       var s = document.createElement('script');
+      Array.prototype.forEach.call(old.attributes, function (a) { s.setAttribute(a.name, a.value); });
       s.textContent = old.textContent;
       old.parentNode.replaceChild(s, old);
     });

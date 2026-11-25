@@ -20,6 +20,7 @@ Website for **Anvora**, a full-service marketing company.
 | Social Media Posts (12 downloadable JPGs) | `/social-media-posts/` |
 | Instagram Stories (12 downloadable JPGs, 1080 × 1920) | `/instagram-stories/` |
 | Scripts for Instagram (12 faceless Reel scripts, .txt downloads) | `/instagram-scripts/` |
+| Storyboarding for SaaS (12 storyboards, 16:9 frames, private) | `/storyboarding-for-saas/` |
 | Greek Mythology (the full story, 14 parts, 95 chapters) | `/greek-mythology/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |
 
@@ -49,6 +50,6 @@ Then open http://localhost:8765
 
 ## Private pages
 
-Brand Guidelines, Social Media Posts, Instagram Stories, Scripts for Instagram and Greek Mythology are password protected. Their content is encrypted (AES-256-GCM, key derived from the password with PBKDF2-SHA256), so it can't be read from the page source without the password. Once unlocked, other private pages open without asking again until the browser tab is closed.
+Brand Guidelines, Social Media Posts, Instagram Stories, Scripts for Instagram, Storyboarding for SaaS and Greek Mythology are password protected. Their content is encrypted (AES-256-GCM, key derived from the password with PBKDF2-SHA256), so it can't be read from the page source without the password. Once unlocked, other private pages open without asking again until the browser tab is closed.
 
 The build scripts are kept outside this public repository, because they contain the private pages' text. The password is never stored in any file.
