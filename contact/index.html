@@ -449,6 +449,16 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 @media (max-width:991px){.anv-myth-toc{grid-template-columns:repeat(3,1fr)}.anv-myth-ch{grid-template-columns:1fr;gap:1.2em}.anv-myth-ch__side{position:static}.anv-myth-gods{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){.anv-myth-toc{grid-template-columns:1fr 1fr}.anv-myth-head{grid-template-columns:1fr;gap:.6em}.anv-myth-prose>p{font-size:1.08em}.anv-myth-labours{grid-template-columns:1fr}.anv-myth-next{justify-content:flex-start}}
 @media (max-width:479px){.anv-myth-gods{grid-template-columns:1fr}.anv-myth-toc__i{min-height:8em;padding:1.1em}}
+.anv-lock{min-height:82vh;display:flex;align-items:center;justify-content:center;padding:9em 1em 5em}
+.anv-lock__box{width:100%;max-width:30em;background:var(--color-white);border-radius:1.2em;padding:var(--gap-l);display:flex;flex-direction:column;gap:1em;text-align:left;transition:opacity .3s}
+.anv-lock.is--checking .anv-lock__box{opacity:0}
+.anv-lock__icon{width:3.4em;height:3.4em;border-radius:50%;background:var(--color-purple);color:var(--color-white);display:flex;align-items:center;justify-content:center;margin-bottom:.4em}
+.anv-lock__form{display:flex;gap:.5em;margin-top:.6em}
+.anv-lock__form input{flex:1;min-width:0;font:inherit;font-size:1em;border:1px solid var(--color-neutral-450);border-radius:2em;padding:.8em 1.2em;background:var(--color-light);color:inherit;outline:none}
+.anv-lock__form input:focus{border-color:var(--color-purple);box-shadow:0 0 0 3px rgba(104,64,255,.18)}
+.anv-lock__form .anv-dl:disabled{opacity:.6;cursor:default}
+.anv-lock__err{color:var(--color-coral);min-height:1.2em;margin:0;font-size:.95em}
+@media (max-width:479px){.anv-lock__form{flex-direction:column}}
 </style></head><body data-barba="wrapper" class="body"><div class="global"><div class="embed-css w-embed"><link href="/css/45154.css" rel="stylesheet" type="text/css"> <!-- variables.css -->
 <link href="/css/45446.css" rel="stylesheet" type="text/css"> <!-- marketing.css -->
 <link href="/css/45511.css" rel="stylesheet" type="text/css"> <!-- components.css -->
@@ -472,13 +482,14 @@ f.classList.add('is--sent');},true);
 function prefill(){var p=new URLSearchParams(location.search).get('plan');var s=document.querySelector('form.anv-form select[name=plan]');if(p&&s){s.value=p}}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;var v=b.getAttribute('data-copy');var done=function(){var l=b.querySelector('.anv-sw__chip .eyebrow');if(l){l.textContent='Copied '+v;setTimeout(function(){l.textContent='Copy'},1400)}b.classList.add('is--copied');setTimeout(function(){b.classList.remove('is--copied')},1400)};if(navigator.clipboard){navigator.clipboard.writeText(v).then(done,done)}else{done()}});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-filter]');if(!b)return;var f=b.getAttribute('data-filter');b.parentNode.querySelectorAll('[data-filter]').forEach(function(x){x.classList.toggle('is--on',x===b)});document.querySelectorAll('.anv-fi').forEach(function(t){t.hidden=!(f==='all'||t.getAttribute('data-cat')===f)});if(window.ScrollTrigger)ScrollTrigger.refresh()});
-function anvPostsLoad(){if(!document.querySelector('canvas[data-post]:not([data-drawn])'))return;if(window.anvPosts){anvPosts.render();return}if(document.getElementById('anv-posts-js'))return;var s=document.createElement('script');s.id='anv-posts-js';s.src='/js/anvora-posts.js';document.head.appendChild(s)}
+function anvPostsLoad(){if(!document.querySelector('canvas[data-post]:not([data-drawn])'))return;if(window.anvPosts){anvPosts.render();return}}
 document.addEventListener('DOMContentLoaded',anvPostsLoad);new MutationObserver(function(){clearTimeout(window.__anvPT);window.__anvPT=setTimeout(anvPostsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
-function anvStoriesLoad(){if(!document.querySelector('canvas[data-story]:not([data-drawn])'))return;if(window.anvStories){anvStories.render();return}if(document.getElementById('anv-stories-js'))return;var s=document.createElement('script');s.id='anv-stories-js';s.src='/js/anvora-stories.js';document.head.appendChild(s)}
+function anvStoriesLoad(){if(!document.querySelector('canvas[data-story]:not([data-drawn])'))return;if(window.anvStories){anvStories.render();return}}
 document.addEventListener('DOMContentLoaded',anvStoriesLoad);new MutationObserver(function(){clearTimeout(window.__anvST);window.__anvST=setTimeout(anvStoriesLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 (function(){if(document.getElementById('anv-scripts-js'))return;var s=document.createElement('script');s.id='anv-scripts-js';s.src='/js/anvora-scripts.js';s.defer=true;document.head.appendChild(s)})();
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-myth-goto]');if(!b)return;e.preventDefault();var t=document.getElementById(b.getAttribute('data-myth-goto'));if(!t)return;if(typeof lenis!=='undefined'&&lenis&&lenis.scrollTo){lenis.scrollTo(t,{offset:-80,duration:1.4})}else{window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'})}});
 window.addEventListener('scroll',function(){var p=document.getElementById('anv-myth-progress');if(!p)return;var h=document.documentElement.scrollHeight-innerHeight;p.style.transform='scaleX('+(h>0?Math.min(1,window.pageYOffset/h):0)+')'},{passive:true});
+(function(){if(document.getElementById('anv-lock-js'))return;var s=document.createElement('script');s.id='anv-lock-js';s.src='/js/anvora-lock.js';document.head.appendChild(s)})();
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script></body></html>

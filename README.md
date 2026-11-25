@@ -45,4 +45,10 @@ Then open http://localhost:8765
 
 - `index.html` and the page folders: the website
 - `css/`, `js/`, `fonts/`, `images/`: styles, scripts, fonts and images
-- `tools/`: the scripts used to generate the pages
+- `js/anvora-lock.js`: unlocks the private pages in the browser
+
+## Private pages
+
+Brand Guidelines, Social Media Posts, Instagram Stories, Scripts for Instagram and Greek Mythology are password protected. Their content is encrypted (AES-256-GCM, key derived from the password with PBKDF2-SHA256), so it can't be read from the page source without the password. Once unlocked, other private pages open without asking again until the browser tab is closed.
+
+The build scripts are kept outside this public repository, because they contain the private pages' text. The password is never stored in any file.
