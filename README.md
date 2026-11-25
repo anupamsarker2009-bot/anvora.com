@@ -20,6 +20,7 @@ Website for **Anvora**, a full-service marketing company.
 | Social Media Posts (12 downloadable JPGs) | `/social-media-posts/` |
 | Instagram Stories (12 downloadable JPGs, 1080 × 1920) | `/instagram-stories/` |
 | Scripts for Instagram (12 faceless Reel scripts, .txt downloads) | `/instagram-scripts/` |
+| Greek Mythology (the full story, 14 parts, 95 chapters) | `/greek-mythology/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |
 
 ## Run it on your computer

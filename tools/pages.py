@@ -83,7 +83,7 @@ home = home.replace('<li class="footer-link__col-li is--soon"><p class="p-m">Web
 
 # footer column headings
 home = re.sub(r'(>Support</a></li>)', r'\1<li class="footer-link__col-li"><a data-underline-link="" href="/brand" class="p-m">Brand Guidelines</a></li>', home, count=1)
-home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-stories" class="p-m">Instagram Stories</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-scripts" class="p-m">Scripts for Instagram</a></li>', 1)
+home = home.replace('href="/brand" class="p-m">Brand Guidelines</a></li>', 'href="/brand" class="p-m">Brand Guidelines</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/social-media-posts" class="p-m">Social Media Posts</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-stories" class="p-m">Instagram Stories</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/instagram-scripts" class="p-m">Scripts for Instagram</a></li><li class="footer-link__col-li"><a data-underline-link="" href="/greek-mythology" class="p-m">Greek Mythology</a></li>', 1)
 home = home.replace('_col-top"><h4 class="h-xs">SEO &amp; Growth</h4>', '_col-top"><h4 class="h-xs">Company</h4>')
 home = home.replace('_col-top"><h4 class="h-xs">Retainer</h4>', '_col-top"><h4 class="h-xs">Resources</h4>')
 
@@ -678,6 +678,44 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-script__cap p{margin:0;font-size:.95em;line-height:1.5;opacity:.85}
 .anv-script .anv-pill{font:inherit;font-size:.95em;background:none;cursor:pointer;color:inherit}
 @media (max-width:767px){.anv-beats li{grid-template-columns:1fr;gap:.4em}.anv-beats__meta{grid-template-columns:1fr;gap:.8em}.anv-script__info{grid-template-columns:1fr;gap:.2em}.anv-script__info dd{margin-bottom:.6em}.anv-script__hook p{font-size:1.15em}}
+.anv-myth-progress{position:fixed;left:0;right:0;bottom:0;height:4px;z-index:50;pointer-events:none}
+.anv-myth-progress span{display:block;height:100%;background:var(--color-purple);transform:scaleX(0);transform-origin:0 50%}
+.anv-myth-toc{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap-s);margin-top:var(--gap-l)}
+.anv-myth-toc__i{font:inherit;color:inherit;text-align:left;cursor:pointer;border:0;background:var(--color-white);border-radius:.75em;padding:1.4em;min-height:10em;display:flex;flex-direction:column;gap:.4em;transition:transform .4s cubic-bezier(.65,.05,0,1),background .3s}
+.anv-myth-toc__i:hover{transform:translateY(-.3em);background:var(--color-purple);color:var(--color-white)}
+.anv-myth-toc__n{font-family:Haffer XH,Arial,sans-serif;font-size:2.4em;line-height:1;letter-spacing:-.04em;color:var(--color-purple);margin-bottom:auto}
+.anv-myth-toc__i:hover .anv-myth-toc__n{color:var(--color-electric)}
+.anv-myth-toc__t{font-size:1.2em;line-height:1.15;letter-spacing:-.01em;font-weight:500}
+.anv-myth-toc__c{font-family:Haffer Mono,Arial,sans-serif;font-size:.6875em;text-transform:uppercase;opacity:.55}
+.anv-myth-head{display:grid;grid-template-columns:auto 1fr;gap:var(--gap-l);align-items:end;padding-bottom:var(--gap-l);margin-bottom:var(--gap-l);border-bottom:1px solid currentColor}
+.anv-myth-head__num{font-family:Haffer XH,Arial,sans-serif;font-size:clamp(5em,12vw,11em);line-height:.8;letter-spacing:-.05em;color:var(--color-purple)}
+.is--dark .anv-myth-head__num{color:var(--color-electric)}
+.anv-myth-head .p-l{max-width:30em;margin-top:.6em;opacity:.75}
+.anv-myth-ch{display:grid;grid-template-columns:minmax(14em,1fr) 2.2fr;gap:var(--gap-l);padding:var(--gap-l) 0;border-bottom:1px solid rgba(128,128,128,.25)}
+.anv-myth-ch__side{position:sticky;top:7em;align-self:start;display:flex;flex-direction:column;gap:.6em}
+.anv-myth-ch__no{font-family:Haffer Mono,Arial,sans-serif;font-size:.6875em;text-transform:uppercase;letter-spacing:.04em;color:var(--color-purple)}
+.is--dark .anv-myth-ch__no{color:var(--color-electric)}
+.anv-myth-prose{max-width:40em}
+.anv-myth-prose>p{font-size:1.2em;line-height:1.62;margin:0 0 1em}
+.anv-myth-prose>p:first-child:first-letter{font-family:Haffer XH,Arial,sans-serif;float:left;font-size:3.6em;line-height:.85;padding:.06em .1em 0 0;color:var(--color-purple)}
+.is--dark .anv-myth-prose>p:first-child:first-letter{color:var(--color-electric)}
+.anv-myth-gods{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em;margin:1.4em 0}
+.anv-myth-god{background:var(--color-white);border-radius:.75em;padding:1.1em;display:flex;flex-direction:column;gap:.35em}
+.anv-myth-god__n{font-family:Haffer Mono,Arial,sans-serif;font-size:.6875em;color:var(--color-purple)}
+.anv-myth-god h4{font-size:1.5em;letter-spacing:-.02em;font-weight:500;margin:0;line-height:1.1}
+.anv-myth-god__role{margin:0;opacity:.6;font-size:.9em}
+.anv-myth-god dl{margin:.5em 0 0;display:flex;flex-direction:column;gap:.15em;font-size:.88em}
+.anv-myth-god dt{font-family:Haffer Mono,Arial,sans-serif;font-size:.75em;text-transform:uppercase;opacity:.5;margin-top:.4em}.anv-myth-god dd{margin:0}
+.anv-myth-note{font-size:.95em;opacity:.65;margin:0 0 1.2em}
+.anv-myth-labours{list-style:none;margin:1.4em 0 1.6em;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+.anv-myth-labours li{display:grid;grid-template-columns:2.6em 1fr;gap:.6em;background:var(--color-card,#2A2626);border-radius:.75em;padding:1.1em}
+.anv-myth-labours li>span{font-family:Haffer XH,Arial,sans-serif;font-size:1.6em;line-height:1;color:var(--color-electric)}
+.anv-myth-labours h4{margin:0 0 .3em;font-size:1.15em;font-weight:500;letter-spacing:-.01em}.anv-myth-labours p{margin:0;font-size:.92em;line-height:1.45;opacity:.75}
+.anv-myth-next{display:flex;flex-wrap:wrap;gap:.6em;justify-content:flex-end;margin-top:var(--gap-l)}
+.anv-myth-next .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit}
+@media (max-width:991px){.anv-myth-toc{grid-template-columns:repeat(3,1fr)}.anv-myth-ch{grid-template-columns:1fr;gap:1.2em}.anv-myth-ch__side{position:static}.anv-myth-gods{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.anv-myth-toc{grid-template-columns:1fr 1fr}.anv-myth-head{grid-template-columns:1fr;gap:.6em}.anv-myth-prose>p{font-size:1.08em}.anv-myth-labours{grid-template-columns:1fr}.anv-myth-next{justify-content:flex-start}}
+@media (max-width:479px){.anv-myth-gods{grid-template-columns:1fr}.anv-myth-toc__i{min-height:8em;padding:1.1em}}
 </style>"""
 
 FORM_JS = """<script id="anv-forms">
@@ -694,6 +732,8 @@ document.addEventListener('DOMContentLoaded',anvPostsLoad);new MutationObserver(
 function anvStoriesLoad(){if(!document.querySelector('canvas[data-story]:not([data-drawn])'))return;if(window.anvStories){anvStories.render();return}if(document.getElementById('anv-stories-js'))return;var s=document.createElement('script');s.id='anv-stories-js';s.src='/js/anvora-stories.js';document.head.appendChild(s)}
 document.addEventListener('DOMContentLoaded',anvStoriesLoad);new MutationObserver(function(){clearTimeout(window.__anvST);window.__anvST=setTimeout(anvStoriesLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 (function(){if(document.getElementById('anv-scripts-js'))return;var s=document.createElement('script');s.id='anv-scripts-js';s.src='/js/anvora-scripts.js';s.defer=true;document.head.appendChild(s)})();
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-myth-goto]');if(!b)return;e.preventDefault();var t=document.getElementById(b.getAttribute('data-myth-goto'));if(!t)return;if(typeof lenis!=='undefined'&&lenis&&lenis.scrollTo){lenis.scrollTo(t,{offset:-80,duration:1.4})}else{window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'})}});
+window.addEventListener('scroll',function(){var p=document.getElementById('anv-myth-progress');if(!p)return;var h=document.documentElement.scrollHeight-innerHeight;p.style.transform='scaleX('+(h>0?Math.min(1,window.pageYOffset/h):0)+')'},{passive:true});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script>"""
@@ -1698,6 +1738,68 @@ scripts_body = (hero("Instagram", f"{len(IG_SCRIPTS)} scripts", "Scripts for Ins
                       ("Edit to the voice", "Cut to a new shot every two to three seconds. Keep captions on, because many people watch with the sound off."),
                       ("Keep visuals simple", "Your own phone footage, screen recordings and free stock clips are enough. Add the on-screen text from the script in Anvora’s fonts and colours.")]), dark=True))
 write("/instagram-scripts", page("instagram-scripts", "Scripts for Instagram", "Ready-to-record faceless Instagram Reel scripts from Anvora, all under 60 seconds.", scripts_body, cta=False))
+
+# ------------------------------------------------------------------ greek mythology (long-form story page)
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "myth_data.py"), encoding="utf-8").read())
+
+def _mq(t):
+    return E(t.replace("'", "’"))
+
+def _myth_chapters(text):
+    out = []
+    for chunk in text.strip().split("## ")[1:]:
+        title, _, body = chunk.partition("\n")
+        out.append((title.strip(), [p.strip() for p in body.strip().split("\n\n") if p.strip()]))
+    return out
+
+_MYTH = [(n, t, intro, _myth_chapters(txt)) for n, t, intro, txt in MYTH_PARTS]
+_myth_words = sum(len(p.split()) for *_, chs in _MYTH for _, ps in chs for p in ps)
+_myth_nch = sum(len(chs) for *_, chs in _MYTH)
+
+def _myth_special(key):
+    if key == "::olympians":
+        return ('<div class="anv-myth-gods">' + "".join(
+            f'<div class="anv-myth-god"><span class="anv-myth-god__n">{i+1:02d}</span><h4>{_mq(n)}</h4><p class="anv-myth-god__role">{_mq(r)}</p>'
+            f'<dl><dt>Rules over</dt><dd>{_mq(d)}</dd><dt>Symbols</dt><dd>{_mq(s)}</dd></dl></div>'
+            for i, (n, r, d, s) in enumerate(OLYMPIANS)) + '</div>'
+            '<p class="anv-myth-note">Hestia, goddess of the hearth, is said in some stories to have given up her seat on Olympus to Dionysus, to keep the peace.</p>')
+    if key == "::labours":
+        return ('<ol class="anv-myth-labours">' + "".join(
+            f'<li><span>{i+1:02d}</span><div><h4>{_mq(n)}</h4><p>{_mq(d)}</p></div></li>' for i, (n, d) in enumerate(LABOURS)) + '</ol>')
+    return ""
+
+def _myth_part(pi, part, ch_start):
+    n, title, intro, chs = part
+    dark = pi % 2 == 1
+    arts = []
+    for k, (ct, ps) in enumerate(chs):
+        body = "".join(_myth_special(p) if p.startswith("::") else f'<p>{_mq(p)}</p>' for p in ps)
+        arts.append(f'<article class="anv-myth-ch"><div class="anv-myth-ch__side"><span class="anv-myth-ch__no">Chapter {ch_start + k}</span><h3 class="h-s">{_mq(ct)}</h3></div>'
+                    f'<div class="anv-myth-prose">{body}</div></article>')
+    return (f'<section data-theme-section="{"dark" if dark else "light"}" class="anv-sec{" is--dark" if dark else ""}" id="myth-part-{pi+1}">'
+            f'<div class="anv-wrap"><header class="anv-myth-head"><div class="anv-myth-head__num">{n}</div><div>'
+            f'<span class="eyebrow">Part {n} · {len(chs)} chapters</span><h2 class="h-xl">{_mq(title)}</h2><p class="p-l">{_mq(intro)}</p></div></header>'
+            f'{"".join(arts)}'
+            f'<div class="anv-myth-next">'
+            + (f'<button type="button" class="anv-pill" data-myth-goto="myth-part-{pi+2}">Next: Part {_MYTH[pi+1][0]}, {_mq(_MYTH[pi+1][1])} →</button>' if pi + 1 < len(_MYTH) else '')
+            + '<button type="button" class="anv-pill" data-myth-goto="myth-contents">Back to contents ↑</button></div></div></section>')
+
+_toc = ('<div class="anv-myth-toc">' + "".join(
+    f'<button type="button" class="anv-myth-toc__i" data-myth-goto="myth-part-{i+1}"><span class="anv-myth-toc__n">{n}</span>'
+    f'<span class="anv-myth-toc__t">{_mq(t)}</span><span class="anv-myth-toc__c">{len(chs)} chapters</span></button>'
+    for i, (n, t, _, chs) in enumerate(_MYTH)) + '</div>')
+
+_parts_html, _c = [], 1
+for _pi, _part in enumerate(_MYTH):
+    _parts_html.append(_myth_part(_pi, _part, _c)); _c += len(_part[3])
+
+myth_body = ('<div class="anv-myth-progress" aria-hidden="true"><span id="anv-myth-progress"></span></div>'
+             + hero("Mythology", f"{len(_MYTH)} parts · {_myth_nch} chapters", "Greek Mythology",
+                    f"The whole story, in order: from the empty Void at the beginning of everything, through the gods, the first people and the great heroes, to the fall of Troy and the end of the Age of Heroes. About {round(_myth_words / 230 / 5) * 5} minutes of reading.", [])
+             + f'<section data-theme-section="light" class="anv-sec" id="myth-contents"><div class="anv-wrap">{head("Contents", "From Chaos to the last of the heroes", "Read it from start to finish, or jump to any part. The myths come in many versions; this retelling follows the best-known one.")}{_toc}</div></section>'
+             + "".join(_parts_html))
+write("/greek-mythology", page("greek-mythology", "Greek Mythology", "The whole of Greek mythology retold in order, from Chaos and the first gods to the fall of Troy and the end of the Age of Heroes.", myth_body, cta=False))
+print("myth:", _myth_nch, "chapters,", _myth_words, "words")
 
 # ------------------------------------------------------------------ homepage
 home = home.replace(SECTION["testimonial"], "").replace(SECTION["made"], "")
