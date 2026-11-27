@@ -17,7 +17,7 @@ Website for **Anvora**, a full-service marketing company.
 | Insights | `/insights/` |
 | FAQs | `/faq/` |
 | Brand Guidelines | `/brand/` |
-| Social Media Posts (12 downloadable JPGs) | `/social-media-posts/` |
+| Social Media Posts (24 downloadable JPGs: 12 new, 12 posted) | `/social-media-posts/` |
 | Instagram Stories (12 downloadable JPGs, 1080 × 1920) | `/instagram-stories/` |
 | Scripts for Instagram (12 faceless Reel scripts, .txt downloads) | `/instagram-scripts/` |
 | Storyboarding for SaaS (12 storyboards, 16:9 frames, private) | `/storyboarding-for-saas/` |
