@@ -601,6 +601,37 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-anim-demo__text .h-xl{color:var(--color-white);text-shadow:0 .08em .5em rgba(0,0,0,.45);max-width:10em;margin:0}
 .anv-anim-demo__btn{pointer-events:auto;background:var(--color-dark);color:var(--color-white);border-radius:3em;padding:.9em 1.5em;text-decoration:none;font-weight:500}
 @media (max-width:767px){.anv-anim-hero{height:78vh}.anv-anim-hero__card{right:1em;left:1em;bottom:1em;padding:1.2em}.anv-anim-demo{aspect-ratio:auto;min-height:26em}}
+.anv-gt{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:var(--gap-s);margin-top:var(--gap-l);align-items:start}
+.anv-gt__main{display:flex;flex-direction:column;gap:.8em}
+.anv-gt__stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:1em;overflow:hidden;background:#151313;margin:0 auto}
+.anv-gt__stage[data-format='9x16']{max-width:24em}.anv-gt__stage[data-format='1x1']{max-width:36em}
+.anv-gt__stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.anv-gt__badge{position:absolute;top:.8em;left:.8em;background:rgba(21,19,19,.7);color:#fff;font-family:Haffer Mono,Arial,sans-serif;font-size:.65em;text-transform:uppercase;letter-spacing:.05em;border-radius:2em;padding:.45em .9em}
+.anv-gt__scrub{display:flex;align-items:center;gap:1em}
+.anv-gt__scrub .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit;min-width:5.5em}
+.anv-gt__scrub input{flex:1;accent-color:var(--color-purple)}
+.anv-gt__side{background:var(--color-white);border-radius:1em;padding:var(--gap-l);display:flex;flex-direction:column;gap:1.3em}
+.anv-gt__side .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit}
+.anv-gt__side .anv-pill.is--on{background:var(--color-dark);color:var(--color-light);border-color:var(--color-dark)}
+.anv-gt__main,.anv-gt__side,.anv-gt__drop{min-width:0}
+.anv-gt__uploads{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.6em;align-items:center}
+.anv-gt__drop{position:relative;display:flex;flex-direction:column;gap:.25em;justify-content:flex-end;aspect-ratio:4/3;border:2px dashed var(--color-neutral-450);border-radius:.8em;padding:.7em;cursor:pointer;overflow:hidden;background:var(--color-light);transition:border-color .2s}
+.anv-gt__drop:hover,.anv-gt__drop.is--over{border-color:var(--color-purple)}
+.anv-gt__drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.anv-gt__drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.anv-gt__drop.has--img img{opacity:1}
+.anv-gt__drop.has--img{border-style:solid;border-color:transparent}
+.anv-gt__drop-t,.anv-gt__drop small{position:relative;z-index:1;pointer-events:none}
+.anv-gt__drop-t{align-self:flex-start;background:rgba(255,255,255,.9);border-radius:2em;padding:.25em .7em;font-size:.85em}
+.anv-gt__drop small{align-self:flex-start;background:rgba(21,19,19,.75);color:#fff;border-radius:2em;padding:.2em .7em;font-size:.72em}
+.anv-gt__swap{font:inherit;font-size:1.2em;width:2.2em;height:2.2em;border-radius:50%;border:1px solid var(--color-neutral-450);background:var(--color-white);cursor:pointer;color:inherit}
+.anv-gt__swap:hover{background:var(--color-dark);color:var(--color-light)}
+.anv-gt__opts{display:grid;grid-template-columns:1fr 1fr;gap:.8em}
+.anv-gt__opts label{display:flex;flex-direction:column;gap:.5em}
+.anv-gt__opts select{font:inherit;font-size:.95em;border:1px solid var(--color-neutral-450);border-radius:2em;padding:.6em .9em;background:var(--color-white);color:inherit;cursor:pointer}
+.anv-gt .anv-dl:disabled{opacity:.75;cursor:default;background:var(--color-dark)}
+@media (max-width:991px){.anv-gt{grid-template-columns:1fr}}
+@media (max-width:479px){.anv-gt__opts{grid-template-columns:1fr}}
 </style></head><body data-barba="wrapper" class="body"><div class="global"><div class="embed-css w-embed"><link href="/css/45154.css" rel="stylesheet" type="text/css"> <!-- variables.css -->
 <link href="/css/45446.css" rel="stylesheet" type="text/css"> <!-- marketing.css -->
 <link href="/css/45511.css" rel="stylesheet" type="text/css"> <!-- components.css -->
@@ -634,6 +665,8 @@ window.addEventListener('scroll',function(){var p=document.getElementById('anv-m
 (function(){if(document.getElementById('anv-lock-js'))return;var s=document.createElement('script');s.id='anv-lock-js';s.src='/js/anvora-lock.js';document.head.appendChild(s)})();
 function anvRibbonsLoad(){if(!document.querySelector('canvas[data-ribbons]:not([data-ribbons-init])'))return;if(window.anvRibbons){anvRibbons.init();return}if(document.getElementById('anv-ribbons-js'))return;var s=document.createElement('script');s.id='anv-ribbons-js';s.src='/js/anvora-ribbons.js';document.head.appendChild(s)}
 document.addEventListener('DOMContentLoaded',anvRibbonsLoad);new MutationObserver(function(){clearTimeout(window.__anvRT);window.__anvRT=setTimeout(anvRibbonsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
+function anvGTLoad(){if(!document.querySelector('[data-gt]:not([data-gt-init])'))return;if(window.anvGT){anvGT.init();return}if(document.getElementById('anv-gt-js'))return;var s=document.createElement('script');s.id='anv-gt-js';s.src='/js/anvora-transition.js';document.head.appendChild(s)}
+document.addEventListener('DOMContentLoaded',anvGTLoad);new MutationObserver(function(){clearTimeout(window.__anvGTT);window.__anvGTT=setTimeout(anvGTLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script></body></html>
