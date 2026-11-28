@@ -55,8 +55,9 @@
       draw();
     }
     function destroy() { if (window.gsap) gsap.ticker.remove(tick); if (tween) tween.kill(); if (ro) ro.disconnect(); items = items.filter(function (x) { return x.cv !== cv; }); }
-    var ro = window.ResizeObserver ? new ResizeObserver(size) : null;
-    if (ro) ro.observe(cv); else window.addEventListener('resize', size);
+    var manual = cv.hasAttribute('data-manual');
+    var ro = !manual && window.ResizeObserver ? new ResizeObserver(size) : null;
+    if (ro) ro.observe(cv); else if (!manual) window.addEventListener('resize', size);
     cv.addEventListener('pointermove', function (e) {
       if (cv.getAttribute('data-follow') === 'off') return;
       var r = cv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
@@ -64,7 +65,7 @@
     });
     cv.addEventListener('pointerleave', function () { if (window.gsap) gsap.to(s, { mx: 0.5, duration: 1.4, ease: 'power3.out', overwrite: 'auto' }); });
     size();
-    if (window.gsap) gsap.ticker.add(tick); else (function loop() { if (!cv.isConnected) return; tick(0, 16); requestAnimationFrame(loop); })();
+    if (manual) { if (tween) tween.kill(); } else if (window.gsap) gsap.ticker.add(tick); else (function loop() { if (!cv.isConnected) return; tick(0, 16); requestAnimationFrame(loop); })();
     var api = {
       cv: cv,
       palette: function (name) { if (PALETTES[name]) { palName = name; pal = PALETTES[name]; draw(); } },
@@ -72,7 +73,9 @@
       speedVal: function () { return s.speed; },
       speed: function (v) { s.speed = v; },
       play: function (on) { s.playing = on; if (tween) tween.paused(!on); },
-      playing: function () { return s.playing; }
+      playing: function () { return s.playing; },
+      // draw the exact frame for time t (seconds); same motion as the live GSAP tween (sine yoyo between 0.42 and -0.32 every 2.25s)
+      renderAt: function (t) { var e = t * s.speed; s.t = e; s.pinch = 0.05 + 0.37 * Math.cos(Math.PI * e / 2.25); draw(); }
     };
     return api;
   }
@@ -117,8 +120,76 @@
       if (left > 0) setTimeout(count, 200); else rec.stop();
     })();
   }
+  var MUXER_URL = 'https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.min.js';
+  function loadMuxer() {
+    if (window.Mp4Muxer) return Promise.resolve();
+    return new Promise(function (ok, fail) {
+      var s = document.createElement('script'); s.src = MUXER_URL; s.onload = function () { window.Mp4Muxer ? ok() : fail(); }; s.onerror = fail;
+      document.head.appendChild(s);
+    });
+  }
+  // yields to the browser without timers, so export keeps going even if the tab is in the background
+  var chan = window.MessageChannel ? new MessageChannel() : null, waiting = [];
+  if (chan) chan.port1.onmessage = function () { var f = waiting.shift(); if (f) f(); };
+  function yieldNow() { return new Promise(function (r) { if (chan) { waiting.push(r); chan.port2.postMessage(0); } else setTimeout(r, 0); }); }
+  async function pickCodec(w, h, fps, bitrate) {
+    var list = ['avc1.64002A', 'avc1.640033', 'avc1.4D002A', 'avc1.4D0033', 'avc1.640028'];
+    for (var i = 0; i < list.length; i++) {
+      try { var s = await VideoEncoder.isConfigSupported({ codec: list[i], width: w, height: h, bitrate: bitrate, framerate: fps }); if (s.supported) return list[i]; } catch (e) {}
+    }
+    return null;
+  }
+  async function exportMp4(src, fmt, secs, ui) {
+    var f = FORMATS[fmt] || FORMATS['16x9'], w = f[0], h = f[1], fps = 60, total = Math.round(secs * fps), bitrate = 14000000;
+    var codec = await pickCodec(w, h, fps, bitrate);
+    if (!codec) throw new Error('codec');
+    await loadMuxer();
+    var c = document.createElement('canvas');
+    c.setAttribute('data-ribbons', src.palName()); c.setAttribute('data-bands', f[2]); c.setAttribute('data-manual', '');
+    c.setAttribute('data-w', w); c.setAttribute('data-h', h); c.setAttribute('data-dpr', '1'); c.setAttribute('data-ribbons-init', '1');
+    var r = Ribbons(c); r.speed(src.speedVal());
+    var muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: 'avc', width: w, height: h, frameRate: fps }, fastStart: 'in-memory' });
+    var failed = null;
+    var enc = new VideoEncoder({ output: function (chunk, meta) { muxer.addVideoChunk(chunk, meta); }, error: function (e) { failed = e; } });
+    enc.configure({ codec: codec, width: w, height: h, bitrate: bitrate, framerate: fps, avc: { format: 'avc' } });
+    for (var i = 0; i < total; i++) {
+      if (failed) throw failed;
+      r.renderAt(i / fps);
+      var frame = new VideoFrame(c, { timestamp: Math.round(i * 1e6 / fps), duration: Math.round(1e6 / fps) });
+      enc.encode(frame, { keyFrame: i % (fps * 2) === 0 });
+      frame.close();
+      while (enc.encodeQueueSize > 6) await yieldNow();
+      if (i % 10 === 0) { ui.render(i / total); await yieldNow(); }
+    }
+    await enc.flush(); enc.close();
+    muxer.finalize();
+    return new Blob([muxer.target.buffer], { type: 'video/mp4' });
+  }
+  function save(blob, name) {
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 10000);
+  }
   window.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-rb-record]'); if (!b) return;
+    if (b.disabled) return;
+    if (window.VideoEncoder && window.VideoFrame && !b.hasAttribute('data-rb-live')) {
+      var wrap0 = b.closest('[data-rb-controls]'), src0 = target(b); if (!src0) return;
+      var sel0 = wrap0.querySelector('[data-rb-format]'), st0 = wrap0.querySelector('[data-rb-status]'), bar0 = wrap0.querySelector('[data-rb-progress]');
+      var fmt0 = sel0 ? sel0.value : '16x9', secs0 = +(b.getAttribute('data-rb-record') || 15), label0 = b.textContent, t0 = performance.now();
+      b.disabled = true; b.textContent = 'Making video… 0%';
+      if (st0) st0.textContent = 'Drawing every frame (60 per second). This usually takes 10 to 40 seconds.';
+      exportMp4(src0, fmt0, secs0, { render: function (p) { b.textContent = 'Making video… ' + Math.round(p * 100) + '%'; if (bar0) bar0.style.transform = 'scaleX(' + p + ')'; } })
+        .then(function (blob) {
+          b.disabled = false; b.textContent = label0; if (bar0) bar0.style.transform = 'scaleX(0)';
+          save(blob, 'anvora-animation-' + fmt0 + '-' + secs0 + 's.mp4');
+          if (st0) st0.textContent = 'Saved: exactly ' + secs0 + ' seconds, 60 fps, MP4 (' + (Math.round(blob.size / 1048576 * 10) / 10) + ' MB). Made in ' + Math.round((performance.now() - t0) / 1000) + 's.';
+        }, function () {
+          if (st0) st0.textContent = 'Couldn’t make an MP4 in this browser, so it will record live instead.';
+          b.disabled = false; b.textContent = label0; if (bar0) bar0.style.transform = 'scaleX(0)';
+          b.setAttribute('data-rb-live', ''); b.click(); b.removeAttribute('data-rb-live');
+        });
+      return;
+    }
     var wrap = b.closest('[data-rb-controls]'), src = target(b); if (!src) return;
     var sel = wrap.querySelector('[data-rb-format]'), st = wrap.querySelector('[data-rb-status]'), bar = wrap.querySelector('[data-rb-progress]');
     var label = b.textContent, secs = +(b.getAttribute('data-rb-record') || 15);
