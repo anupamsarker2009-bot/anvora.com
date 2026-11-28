@@ -22,7 +22,7 @@ Website for **Anvora**, a full-service marketing company.
 | Scripts for Instagram (12 faceless Reel scripts, .txt downloads) | `/instagram-scripts/` |
 | Storyboarding for SaaS (12 storyboards, 16:9 frames, private) | `/storyboarding-for-saas/` |
 | Marketing Funnels (guide with examples and calculator, private) | `/marketing-funnels/` |
-| Animation (flowing ribbons + gradient photo transition, video export, public) | `/animation/` |
+| Animation (ribbons, gradient photo transition, kinetic text maker; MP4 export; public) | `/animation/` |
 | Greek Mythology (the full story, 14 parts, 95 chapters) | `/greek-mythology/` |
 | Ownership (public: who owns Anvora) | `/ownership/` |
 | Legal | `/legal/privacy-policy/`, `/legal/terms-and-conditions/`, `/legal/cookie-policy/`, `/legal/licensing-agreement/` |

@@ -632,6 +632,32 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-gt .anv-dl:disabled{opacity:.75;cursor:default;background:var(--color-dark)}
 @media (max-width:991px){.anv-gt{grid-template-columns:1fr}}
 @media (max-width:479px){.anv-gt__opts{grid-template-columns:1fr}}
+.anv-kt{display:flex;flex-direction:column;gap:var(--gap-s);margin-top:var(--gap-l)}
+.anv-kt__top{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:var(--gap-s);align-items:start}
+.anv-kt__stage{background:#ECECEE}
+.anv-kt__time{font-family:Haffer Mono,Arial,sans-serif;font-size:.8em;opacity:.6;min-width:6.5em;text-align:right}
+.anv-kt__total{font-family:Haffer XH,Arial,sans-serif;font-weight:400;font-size:1.8em;letter-spacing:-.03em;line-height:1.1}
+.anv-kt__editor{background:var(--color-white);border-radius:1em;padding:var(--gap-l);display:flex;flex-direction:column;gap:.8em}
+.anv-kt__editor-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1em;flex-wrap:wrap;margin-bottom:.4em}
+.anv-kt__editor-head .p-m{margin:.4em 0 0;max-width:40em}
+.anv-kt__editor .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit}
+.anv-kt__head-row,.anv-kt-row{display:grid;grid-template-columns:2.2em minmax(0,1fr) 11em 7em 7.5em;gap:.6em;align-items:center}
+.anv-kt__head-row{font-family:Haffer Mono,Arial,sans-serif;font-size:.65em;text-transform:uppercase;opacity:.5;padding:0 0 .2em}
+.anv-kt__head-row span:nth-child(3),.anv-kt__head-row span:nth-child(4){padding-left:.3em}
+.anv-kt__list{display:flex;flex-direction:column;gap:.5em}
+.anv-kt-row__n{font-family:Haffer Mono,Arial,sans-serif;font-size:.75em;color:var(--color-purple)}
+.anv-kt-row input,.anv-kt-row select{font:inherit;font-size:.95em;border:1px solid var(--color-neutral-450);border-radius:.6em;padding:.6em .8em;background:var(--color-light);color:inherit;min-width:0;width:100%}
+.anv-kt-row input:focus,.anv-kt-row select:focus{outline:none;border-color:var(--color-purple);box-shadow:0 0 0 3px rgba(104,64,255,.15)}
+.anv-kt-row button{font:inherit;width:2.3em;height:2.3em;border-radius:50%;border:1px solid var(--color-neutral-450);background:var(--color-white);cursor:pointer;color:inherit;font-size:.85em}
+.anv-kt-row button:hover:not(:disabled){background:var(--color-dark);color:var(--color-light)}
+.anv-kt-row button:disabled{opacity:.3;cursor:default}
+.anv-kt-row>button{justify-self:start}
+.anv-kt-row{grid-template-columns:2.2em minmax(0,1fr) 11em 7em 2.3em 2.3em 2.3em}
+.anv-kt__head-row{grid-template-columns:2.2em minmax(0,1fr) 11em 7em 8.1em}
+.anv-kt__add{align-self:flex-start;font:inherit;border:1px dashed var(--color-neutral-450);border-radius:2em;padding:.65em 1.2em;background:none;cursor:pointer;color:var(--color-purple)}
+.anv-kt__add:hover{border-color:var(--color-purple)}
+@media (max-width:991px){.anv-kt__top{grid-template-columns:1fr}}
+@media (max-width:767px){.anv-kt__head-row{display:none}.anv-kt-row{grid-template-columns:1.8em minmax(0,1fr) 2.3em 2.3em 2.3em;row-gap:.4em;padding-bottom:.6em;border-bottom:1px solid var(--color-neutral-300)}.anv-kt-row input{grid-column:2/-1}.anv-kt-row select[data-k=style]{grid-column:2/3}.anv-kt-row select[data-k=size]{grid-column:3/-1}.anv-kt-row button[data-kt-jump]{grid-column:2}}
 </style></head><body data-barba="wrapper" class="body"><div class="global"><div class="embed-css w-embed"><link href="/css/45154.css" rel="stylesheet" type="text/css"> <!-- variables.css -->
 <link href="/css/45446.css" rel="stylesheet" type="text/css"> <!-- marketing.css -->
 <link href="/css/45511.css" rel="stylesheet" type="text/css"> <!-- components.css -->
@@ -667,6 +693,8 @@ function anvRibbonsLoad(){if(!document.querySelector('canvas[data-ribbons]:not([
 document.addEventListener('DOMContentLoaded',anvRibbonsLoad);new MutationObserver(function(){clearTimeout(window.__anvRT);window.__anvRT=setTimeout(anvRibbonsLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 function anvGTLoad(){if(!document.querySelector('[data-gt]:not([data-gt-init])'))return;if(window.anvGT){anvGT.init();return}if(document.getElementById('anv-gt-js'))return;var s=document.createElement('script');s.id='anv-gt-js';s.src='/js/anvora-transition.js';document.head.appendChild(s)}
 document.addEventListener('DOMContentLoaded',anvGTLoad);new MutationObserver(function(){clearTimeout(window.__anvGTT);window.__anvGTT=setTimeout(anvGTLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
+function anvKTLoad(){if(!document.querySelector('[data-kt]:not([data-kt-init])'))return;if(window.anvKT){anvKT.init();return}if(document.getElementById('anv-kt-js'))return;var s=document.createElement('script');s.id='anv-kt-js';s.src='/js/anvora-kinetic.js';document.head.appendChild(s)}
+document.addEventListener('DOMContentLoaded',anvKTLoad);new MutationObserver(function(){clearTimeout(window.__anvKTT);window.__anvKTT=setTimeout(anvKTLoad,60)}).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener('DOMContentLoaded',prefill);window.addEventListener('popstate',prefill);setInterval(prefill,1500);
 })();
 </script></body></html>
