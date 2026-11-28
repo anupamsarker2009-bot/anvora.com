@@ -587,6 +587,12 @@ img[src*="osmo-micrographic"],img[src*="cutout-new"],img[src*="/pf-"],.about-gal
 .anv-anim-group{display:flex;flex-direction:column;gap:.7em}
 .anv-anim-controls .anv-pill{font:inherit;background:none;cursor:pointer;color:inherit}
 .anv-anim-controls .anv-pill.is--on{background:var(--color-dark);color:var(--color-light);border-color:var(--color-dark)}
+.anv-anim-video{flex-basis:100%;padding-top:var(--gap-s);border-top:1px solid var(--color-neutral-450)}
+.anv-anim-video select{font:inherit;font-size:.95em;border:1px solid var(--color-neutral-450);border-radius:2em;padding:.65em 1em;background:var(--color-white);color:inherit;cursor:pointer}
+.anv-anim-video .anv-dl:disabled{opacity:.75;cursor:default;background:var(--color-dark)}
+.anv-anim-progress{height:.35em;max-width:34em;border-radius:1em;background:var(--color-neutral-300);overflow:hidden}
+.anv-anim-progress span{display:block;height:100%;background:var(--color-purple);transform:scaleX(0);transform-origin:0 50%;transition:transform .2s linear}
+.anv-anim-status{margin:0;font-size:.9em;opacity:.65;max-width:40em}
 .anv-anim-controls input[type=range]{width:14em;accent-color:var(--color-purple)}
 .anv-anim-demo{position:relative;margin-top:var(--gap-l);border-radius:1.2em;overflow:hidden;aspect-ratio:16/8;min-height:22em;background:#151313}
 .anv-anim-demo canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
